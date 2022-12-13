@@ -5,7 +5,6 @@ import authSlice from "../store/slice/authSlice";
 
 export const registerApi = async (body, dispatch) => {
   const { username, name, password, email } = body;
-	console.log("body: ", body)
 	dispatch(authSlice.actions.registerStart())
   if (!validate.ValidateNormalLetter(username)) {
 		return dispatch(authSlice.actions.registerFailure({message: "Username not valid!"}))
