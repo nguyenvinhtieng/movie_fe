@@ -100,13 +100,22 @@ const router = createBrowserRouter([
       </ProtectedUserRoute>
     ),
     errorElement: <ErrorPage />,
-    children: [
-      {
-        path: "/watch/*",
-        element: <Watch />,
-      },
-    ],
+    // children: [
+    //   {
+    //     path: "/watch/*",
+    //     element: <Watch />,
+    //   },
+    // ],
   },
+  {
+    path: "/watch/*",
+    element: (
+      <ProtectedUserRoute>
+        <Watch />
+      </ProtectedUserRoute>
+    ),
+    errorElement: <ErrorPage />,
+  }
 ]);
 
 export default router;
