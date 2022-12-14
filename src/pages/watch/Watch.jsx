@@ -7,9 +7,10 @@ import "./watch.scss";
 
 export default function Watch() {
   return (
-    <>
+    
+    <div className="homeUser">
       <Header></Header>
-      <main>
+      <main className='containerUser mt100'>
         <article>
           <section className="movie-watch">
             <div className="movie-watch__container">
@@ -21,6 +22,6 @@ export default function Watch() {
           <MovieList></MovieList>
         </article>
       </main>
-    </>
+    </div>
   );
 }

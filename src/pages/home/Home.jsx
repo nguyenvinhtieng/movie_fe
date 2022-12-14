@@ -20,7 +20,7 @@ const Home = () => {
   //   loadMovie()
   // }, [])
   return (
-    <>
+    <div className="homeUser">
       <Header></Header>
       <main>
         <article>
@@ -28,7 +28,7 @@ const Home = () => {
           <MovieList></MovieList>
         </article>
       </main>
-    </>
+    </div>
   );
 };
 

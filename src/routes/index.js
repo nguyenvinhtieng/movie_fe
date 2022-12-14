@@ -21,6 +21,7 @@ import Admin from "../pages/admin/Admin";
 import Categories from "../pages/admin/categories/Categories";
 import Detail from "../pages/detail/Detail";
 import Watch from "../pages/watch/Watch";
+import Movies from "../pages/movies/Movies";
 
 const router = createBrowserRouter([
   {
@@ -123,6 +124,15 @@ const router = createBrowserRouter([
     element: (
       // <ProtectedUserRoute>
         <Detail />
+      // </ProtectedUserRoute>
+    ),
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/movies",
+    element: (
+      // <ProtectedUserRoute>
+        <Movies />
       // </ProtectedUserRoute>
     ),
     errorElement: <ErrorPage />,

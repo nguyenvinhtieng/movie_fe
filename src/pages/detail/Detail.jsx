@@ -5,12 +5,12 @@ import MovieList from "../../components/MovieList/MovieList";
 
 export default function Detail() {
   return (
-    <>
+    <div className="homeUser">
       <Header></Header>
       <main>
         <article>
           <section className="movie-detail">
-            <div className="container">
+            <div className="containerUser detail">
               <figure className="movie-detail-banner">
                 <img src="/images/movie-4.png" alt="Free guy movie poster" />
 
@@ -99,6 +99,6 @@ export default function Detail() {
           <MovieList></MovieList>
         </article>
       </main>
-    </>
+    </div>
   );
 }

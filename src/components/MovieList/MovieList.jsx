@@ -4,28 +4,6 @@ export default function MovieList() {
   return (
     <section className="top-rated">
       <div className="containerMovieList">
-        <p className="section-subtitle">Movies</p>
-
-        <h2 className="h2 section-title">Top movies</h2>
-
-        <ul className="filter-list">
-          <li>
-            <button className="filter-btn">Movies</button>
-          </li>
-
-          <li>
-            <button className="filter-btn">TV Shows</button>
-          </li>
-
-          <li>
-            <button className="filter-btn">Documentary</button>
-          </li>
-
-          <li>
-            <button className="filter-btn">Sports</button>
-          </li>
-        </ul>
-
         <ul className="movies-list">
           <li>
             <div className="movie-card">

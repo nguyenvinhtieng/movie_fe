@@ -63,7 +63,9 @@ a {
   
   
   
-  
+  .homeUser {
+    background-color: var(--eerie-black);
+  }
   
   /*-----------------------------------*\
    * #RESET
@@ -1586,3 +1588,38 @@ a {
     }
   
   }
+
+
+
+
+.headerUser {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  .navbarUser {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: space-between;
+  }
+  .name {
+    font-family: 'Roboto', sans-serif;
+    color: #fff;
+    font-size: 14px;
+  }
+}
+.containerUser {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1200px;
+  // display: flex;
+  &.detail {
+    display: flex;
+    gap: 100px
+  }
+  &.mt100 {
+    padding-top: 100px;
+  }
+}
