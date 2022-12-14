@@ -8,7 +8,7 @@ import Rating  from "react-rating"
 import { AiFillStar, AiOutlineStar } from "react-icons/ai"
 // import "./watch.scss";
 import { Player } from "video-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useEffect } from "react";
 function makerandomString() {
   let length = Math.floor(Math.random() * 100);
@@ -24,6 +24,8 @@ export default function Detail() {
   const state = useSelector((state) => state.movie);
   const [showTrailer, setShowTrailer] = useState(false);
   const [reviews, setReviews] = useState([]);
+  const [rating, setRating] = useState(0);
+  const reviewContentRef = useRef();
   const location = useLocation();
   let movieId = location.pathname.split("/")[2];
   let movies = [
@@ -84,7 +86,11 @@ export default function Detail() {
         }
       }))
   },[])
-
+  const saveReview = () => {
+    let content = reviewContentRef.current.value;
+    console.log("reviews content: ", content);
+    console.log("rating: ", rating);
+  }
 
   return (
     <div className="homeUser">
@@ -189,9 +195,9 @@ export default function Detail() {
               {/* <div className="review__form--avatar"> */}
               <h4>Add your reviews</h4>
               <div className="review__form--main">
-                  <textarea name="" id="" cols="30" rows="10" placeholder="Enter your reviews...."></textarea>
-                  <Rating emptySymbol={<AiOutlineStar />} fullSymbol={<AiFillStar />}></Rating>
-                  <button>Save</button>
+                  <textarea name="" id="" cols="30" rows="10" placeholder="Enter your reviews...." ref={reviewContentRef}></textarea>
+                  <Rating emptySymbol={<AiOutlineStar />} onChange={(val)=>setRating(val)} fullSymbol={<AiFillStar />}></Rating>
+                  <button onClick={saveReview}>Save</button>
               </div>
             </div>
             <div className="review__list">
@@ -217,3 +223,4 @@ export default function Detail() {
     </div>
   );
 }
+
