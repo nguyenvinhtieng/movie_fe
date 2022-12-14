@@ -1,7 +1,9 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 export default function Header() {
+  const auth = useSelector(state => state.auth)
   return (
     <header className="headerUser" data-header>
       <nav className="navbarUser" data-navbar>
@@ -12,7 +14,7 @@ export default function Header() {
           <li><Link to="/buy-vip" className="navbar-link">Buy VIP</Link></li>
         </ul>
         <ul className="navbar-list">
-          <li><span className="name">Hello VinhTieng</span></li>
+          <li><span className="name">Hello {auth.user?.name || "Anonymous"}</span></li>
           <li><Link to="/" className="navbar-link">Logout</Link></li>
         </ul>
       </nav>

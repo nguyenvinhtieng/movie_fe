@@ -12,13 +12,13 @@ import MovieList from "../../components/MovieList/MovieList";
 const Home = () => {
   // // const state = useSelector(state => state)
   // // console.log("state: ", state)
-  // const dispatch = useDispatch();
-  // const loadMovie = async () => {
-  //   await getMoviesAPI(dispatch); 
-  // }
-  // useEffect(()=> {
-  //   loadMovie()
-  // }, [])
+  const dispatch = useDispatch();
+  const loadMovie = async () => {
+    await getMoviesAPI(dispatch); 
+  }
+  useEffect(()=> {
+    loadMovie()
+  }, [])
   return (
     <div className="homeUser">
       <Header></Header>
