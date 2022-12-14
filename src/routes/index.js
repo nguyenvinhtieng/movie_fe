@@ -26,6 +26,8 @@ import Categories from "../pages/admin/categories/Categories";
 import Detail from "../pages/detail/Detail";
 import Watch from "../pages/watch/Watch";
 import Movies from "../pages/movies/Movies";
+import BuyVip from "../pages/buy-vip/BuyVip";
+import Chat from "../pages/chat/Chat";
 
 const router = createBrowserRouter([
   {
@@ -137,6 +139,24 @@ const router = createBrowserRouter([
     element: (
       // <ProtectedUserRoute>
         <Movies />
+      // </ProtectedUserRoute>
+    ),
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/buy-vip",
+    element: (
+      // <ProtectedUserRoute>
+        <BuyVip />
+      // </ProtectedUserRoute>
+    ),
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/chat",
+    element: (
+      // <ProtectedUserRoute>
+        <Chat />
       // </ProtectedUserRoute>
     ),
     errorElement: <ErrorPage />,

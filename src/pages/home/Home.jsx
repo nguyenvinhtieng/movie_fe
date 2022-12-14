@@ -19,13 +19,14 @@ const Home = () => {
   useEffect(()=> {
     loadMovie()
   }, [])
+  
   return (
     <div className="homeUser">
       <Header></Header>
       <main>
         <article>
           <Hero></Hero>
-          <MovieList></MovieList>
+          {/* <MovieList></MovieList> */}
         </article>
       </main>
     </div>
