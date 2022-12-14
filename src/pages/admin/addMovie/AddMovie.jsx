@@ -1,5 +1,5 @@
 import "./addMovie.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createMovieAPI } from "../../../API/movies.api";
@@ -8,6 +8,8 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
+import { toast } from "react-toastify";
+import movieSlice from "../../../store/slice/movieSlice";
 
 const AddMovie = () => {
   const [movie, setMovie] = useState(null);
@@ -19,9 +21,18 @@ const AddMovie = () => {
   const [uploaded, setUploaded] = useState(0);
   const navigate = useNavigate();
 
-  const { categories } = useSelector((state) => state.category);
+  const { categories, error, success } = useSelector((state) => state.category);
 
   const dispatch = useDispatch();
+  useEffect(() => {
+    if (error) {
+      toast.error(error)
+    }
+    if (success) {
+      toast.success(success)
+    }
+    dispatch(movieSlice.actions.refreshErrorAndSuccess())
+  },[error, success])
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -86,7 +97,7 @@ const AddMovie = () => {
 		console.log(movie);
 
     createMovieAPI(movie, dispatch);
-    // navigate("/admin/movies");
+    navigate("/admin/movies");
   };
 
   return (

@@ -4,6 +4,7 @@ const initialState = {
     movies: [],
     isFetching: false,
     error: null,
+    success: null
   };
 
 const movieSlice = createSlice({
@@ -37,6 +38,7 @@ const movieSlice = createSlice({
             state.movies = [...state.movies, action.payload]
             state.isFetching = false
             state.error = null
+            state.success = "Tạo thành công!"
         },
         
         createMovieFailure(state, action) {
@@ -57,6 +59,7 @@ const movieSlice = createSlice({
               )
               state.isFetching = false
               state.error = null
+              state.success = "Cập nhật thành công!"
         },
         
         updateMovieFailure(state, action) {
@@ -75,6 +78,7 @@ const movieSlice = createSlice({
             state.movies = state.movies.filter((movie) => movie._id !== action.payload)
             state.isFetching = false
             state.error = null
+            state.success = "Xoá thành công!"
         },
         
         deleteMovieFailure(state, action) {
@@ -82,6 +86,10 @@ const movieSlice = createSlice({
             state.isFetching = false
             state.error = action.payload.error_message
         },
+        refreshErrorAndSuccess(state) {
+            state.error = null
+            state.success = null
+        }
     }
   })
   
