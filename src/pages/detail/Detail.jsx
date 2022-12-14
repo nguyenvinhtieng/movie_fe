@@ -4,12 +4,26 @@ import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import Header from "../../components/Header/Header";
 import MovieList from "../../components/MovieList/MovieList";
+import Rating  from "react-rating"
+import { AiFillStar, AiOutlineStar } from "react-icons/ai"
 // import "./watch.scss";
 import { Player } from "video-react";
-
+import { useState } from "react";
+import { useEffect } from "react";
+function makerandomString() {
+  let length = Math.floor(Math.random() * 100);
+  var result           = '';
+  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var charactersLength = characters.length;
+  for ( var i = 0; i < length; i++ ) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}
 export default function Detail() {
   const state = useSelector((state) => state.movie);
-  
+  const [showTrailer, setShowTrailer] = useState(false);
+  const [reviews, setReviews] = useState([]);
   const location = useLocation();
   let movieId = location.pathname.split("/")[2];
   let movies = [
@@ -61,7 +75,16 @@ export default function Detail() {
   ]
 
   let movie = movies.find((movie) => movie.id == movieId);
-  console.log(movie);
+  useEffect(()=> {
+    setReviews(new Array(10).fill({}).map(item => {
+      return {
+        content: makerandomString(),
+        rating: Math.floor(Math.random() * 5),
+        movieId: 1
+        }
+      }))
+  },[])
+
 
   return (
     <div className="homeUser">
@@ -128,29 +151,65 @@ export default function Detail() {
                     <span>Share</span>
                   </button> */}
 
-                  <div className="title-wrapper">
+                  {/* <div className="title-wrapper">
                     <p className="title">Prime Video</p>
                     <p className="text">Streaming Channels</p>
-                  </div>
+                  </div> */}
                   <Link to={`/watch/${movie.id}`}>
                     <button className="btn btn-primary">
                       <ion-icon name="play"></ion-icon>
                       <span>Watch Now</span>
                     </button>
                   </Link>
+                  {/* <Link to={`/watch/${movie.id}`} > */}
+                    <button className="btn btn-primary"  onClick={()=>setShowTrailer(true)}>
+                      <ion-icon name="play"></ion-icon>
+                      <span>View Trailer</span>
+                    </button>
+                  {/* </Link> */}
                 </div>
                
 
               </div>
             </div>
-            <div className="trailer">
+            
+            <div className={`trailer ${showTrailer ? "is-show" : ""}`}>
+              <div className="trailer__overlay" onClick={()=>setShowTrailer(false)}></div>
               <div className="trailer__container">
-                  <h3>Trailer</h3>
                 <Player>
                   <source src={movie.trailer} />
                 </Player>
                 </div>
               </div>
+          </section>
+          <section className="review containerUser">
+            <h3>REVIEWS</h3>
+
+            <div className="review__form">
+              {/* <div className="review__form--avatar"> */}
+              <h4>Add your reviews</h4>
+              <div className="review__form--main">
+                  <textarea name="" id="" cols="30" rows="10" placeholder="Enter your reviews...."></textarea>
+                  <Rating emptySymbol={<AiOutlineStar />} fullSymbol={<AiFillStar />}></Rating>
+                  <button>Save</button>
+              </div>
+            </div>
+            <div className="review__list">
+              {reviews.length > 0 && reviews.map((review, index) => 
+              <div className="review__item">
+                <div className="review__item--head">
+                  <div className="review__item--avatar">
+                    <img src="https://source.unsplash.com/random" alt="" />
+                  </div>
+                  <div className="review__item--name">Nguyn Van A</div>
+                </div>
+                <div className="review__item--content">
+                  <p>{review.content}</p>
+                  <div className="review__item--star">{review.rating}/5⭐</div>
+                </div>
+              </div>)}
+              
+            </div>
           </section>
           <MovieList movies={movies}></MovieList>
         </article>
