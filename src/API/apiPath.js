@@ -2,9 +2,14 @@ export const path = {
     register: '/api/auth/signup',
     login: '/api/auth/signin',
     getLists: `/api/lists/`,
-    postList: `/api/lists/`,
+    createList: `/api/lists/`,
     deleteList: (id) => `/api/lists/${id}`,
-    getMovies: `/api/movie/`,
-    postMovie: `/api/movies/`,
-    deleteMovie: (id) => `/api/movies/${id}`
+    getMovies: `/api/admin/movies/`,
+    createMovie: `/api/admin/movies/`,
+    updateMovie: (id) => `/api/admin/movies/${id}`,
+    deleteMovie: (id) => `/api/admin/movies/${id}`,
+    getCategories: `/api/admin/categories/`,
+    createCategory: `/api/admin/categories/`,
+    deleteCategory: (id) => `/api/admin/categories/${id}`,
+    updateCategory: (id) => `/api/admin/categories/${id}`,
 }

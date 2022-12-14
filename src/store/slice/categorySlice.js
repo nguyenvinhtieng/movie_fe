@@ -10,74 +10,74 @@ const categorySlice = createSlice({
     name: 'categorySlice',
     initialState,
     reducers: {
-        getMoviesStart(state) {
+        getCategoriesStart(state) {
             state.categories = []
             state.isFetching = true
             state.error = null
         },
-        getMoviesSuccess(state, action) {
+        getCategoriesSuccess(state, action) {
             state.categories = action.payload
             state.isFetching = false
             state.error = null
         },
         
-        getMoviesFailure(state, action) {
+        getCategoriesFailure(state, action) {
             state.categories = []
             state.isFetching= false
             state.error= action.payload.error_message
         },
         
-        createMovieStart(state) {
+        createCategoryStart(state) {
             state = {...state}
             state.isFetching = true
             state.error = null 
         },
         
-        createMovieSuccess(state, action) {
-            state.categories = [...state.movies, action.payload]
+        createCategorySuccess(state, action) {
+            state.categories = [...state.categories, action.payload]
             state.isFetching = false
             state.error = null
         },
         
-        createMovieFailure(state, action) {
+        createCategoryFailure(state, action) {
             state = {...state}
             state.isFetching = false
             state.error = action.payload.error_message
         },
         
-        updateMovieStart(state) {
+        updateCategoryStart(state) {
             state = {...state}
             state.isFetching = true
             state.error = null
         },
         
-        updateMovieSuccess(state, action) {
-            state.categories = state.movies.map(
-                (movie) => movie._id === action.payload._id && action.payload
+        updateCategorySuccess(state, action) {
+            state.categories = state.categories.map(
+                (category) => category.id === action.payload.id ? action.payload : category
               )
               state.isFetching = false
               state.error = null
         },
         
-        updateMovieFailure(state, action) {
+        updateCategoryFailure(state, action) {
             state = {...state}
             state.isFetching = false
             state.error = action.payload.error_message
         },
         
-        deleteMovieStart(state) {
+        deleteCategoryStart(state) {
                 state = {...state}
                 state.isFetching = true
                 state.error = null
         },
         
-        deleteMovieSuccess(state, action) {
-            state.categories = state.movies.filter((movie) => movie._id !== action.payload)
+        deleteCategorySuccess(state, action) {
+            state.categories = state.categories.filter((category) => category._id !== action.payload)
             state.isFetching = false
             state.error = null
         },
         
-        deleteMovieFailure(state, action) {
+        deleteCategoryFailure(state, action) {
             state = {...state}
             state.isFetching = false
             state.error = action.payload.error_message
