@@ -14,4 +14,5 @@ export const path = {
     deleteCategory: (id) => `/api/admin/categories/${id}`,
     updateCategory: (id) => `/api/admin/categories/${id}`,
     addReview: `/api/review`,
+    
 }

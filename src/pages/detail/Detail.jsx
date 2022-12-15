@@ -21,7 +21,6 @@ export default function Detail() {
   const [rating, setRating] = useState(0);
   const reviewContentRef = useRef();
   const location = useLocation();
-  console.log("auth: ", auth.user)
   let movieId = location.pathname.split("/")[2];
   useEffect(()=>{
     if(movie.movies.length > 0) 
@@ -32,17 +31,12 @@ export default function Detail() {
     let content = reviewContentRef.current.value;
     if(content.trim() === "") return;
     let newMovie = {...curentMovie};
-    newMovie.reviews = [
-      ...newMovie.reviews,
-      {
-        id: Math.random(),
-        content,
-        rating,
-        users: auth.user,
-        createdAt: new Date().toISOString(),
-        movieId
-      }
-    ]
+    const res = await request("POST", path.addReview, {body: {
+      content,
+      rating,
+      movieId
+    }})
+    newMovie.reviews = [...newMovie.reviews, res];
     setCurentMovie(newMovie);
     reviewContentRef.current.value = "";
     setRating(0);
