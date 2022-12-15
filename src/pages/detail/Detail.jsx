@@ -10,86 +10,42 @@ import { AiFillStar, AiOutlineStar } from "react-icons/ai"
 import { Player } from "video-react";
 import { useRef, useState } from "react";
 import { useEffect } from "react";
-function makerandomString() {
-  let length = Math.floor(Math.random() * 100);
-  var result           = '';
-  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  var charactersLength = characters.length;
-  for ( var i = 0; i < length; i++ ) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-  }
-  return result;
-}
+import axios from "axios";
+import request from "../../services/request";
+import { path } from "../../API/apiPath";
+
 export default function Detail() {
-  const state = useSelector((state) => state.movie);
+  const {movie, auth} = useSelector((state) => state);
+  const [curentMovie, setCurentMovie] = useState({});
   const [showTrailer, setShowTrailer] = useState(false);
-  const [reviews, setReviews] = useState([]);
   const [rating, setRating] = useState(0);
   const reviewContentRef = useRef();
   const location = useLocation();
+  console.log("auth: ", auth.user)
   let movieId = location.pathname.split("/")[2];
-  let movies = [
-    {
-      id: 1,
-      'title': '123123asdasd',
-      'description':'typetest345',
-      'imgTitle': '/images/movie-1.png',
-      'imgSm': '/images/movie-1.png',
-      'trailer': '/video.mp4',
-      'video': '/video.mp4',
-      'year': '2022',
-      'limitAge': 18,
-      'active': true,
-      'vip': true,
-      'categories': [1, 2],
-      'series': 1
-    },
-    {
-      id: 2,
-      'title': '123123asdasd',
-      'description':'typetest345',
-      'imgTitle': '/images/movie-1.png',
-      'imgSm': '/images/movie-1.png',
-      'trailer': '/video.mp4',
-      'video': '/video.mp4',
-      'year': '2022',
-      'limitAge': 18,
-      'active': true,
-      'vip': true,
-      'categories': [1, 2],
-      'series': 1
-    },
-    {
-      id: 3,
-      'title': '123123asdasd',
-      'description':'typetest345',
-      'imgTitle': '/images/movie-1.png',
-      'imgSm': '/images/movie-1.png',
-      'trailer': '/video.mp4',
-      'video': '/video.mp4',
-      'year': '2022',
-      'limitAge': 18,
-      'active': true,
-      'vip': false,
-      'categories': [1, 2],
-      'series': 1
-    },
-  ]
+  useEffect(()=>{
+    if(movie.movies.length > 0) 
+      setCurentMovie(movie?.movies?.find(item => item.id == movieId))
+  }, [movie.movies])
 
-  let movie = movies.find((movie) => movie.id == movieId);
-  useEffect(()=> {
-    setReviews(new Array(10).fill({}).map(item => {
-      return {
-        content: makerandomString(),
-        rating: Math.floor(Math.random() * 5),
-        movieId: 1
-        }
-      }))
-  },[])
-  const saveReview = () => {
+  const saveReview = async () => {
     let content = reviewContentRef.current.value;
-    console.log("reviews content: ", content);
-    console.log("rating: ", rating);
+    if(content.trim() === "") return;
+    let newMovie = {...curentMovie};
+    newMovie.reviews = [
+      ...newMovie.reviews,
+      {
+        id: Math.random(),
+        content,
+        rating,
+        users: auth.user,
+        createdAt: new Date().toISOString(),
+        movieId
+      }
+    ]
+    setCurentMovie(newMovie);
+    reviewContentRef.current.value = "";
+    setRating(0);
   }
 
   return (
@@ -100,7 +56,7 @@ export default function Detail() {
           <section className="movie-detail">
             <div className="containerUser detail">
               <figure className="movie-detail-banner">
-                <img src={movie.imgTitle} alt="" />
+                <img src={curentMovie.imgTitle} onError={(e)=>e.target.src = "/images/movie-1.png"} alt="" />
 
                 <button className="play-btn">
                   <ion-icon name="play-circle-outline"></ion-icon>
@@ -111,31 +67,27 @@ export default function Detail() {
                 <p className="detail-subtitle">MOVIE</p>
 
                 <h1 className="h1 detail-title">
-                  {movie.title}
+                  {curentMovie.title}
                 </h1>
 
                 <div className="meta-wrapper">
                   <div className="badge-wrapper">
-                  {movie.vip && <div className="badge badge-fill">VIP</div>}
+                  {curentMovie.vip && <div className="badge badge-fill">VIP</div>}
 
                     <div className="badge badge-outline">HD</div>
                   </div>
 
                   <div className="ganre-wrapper">
-                    <a href="#">Comedy,</a>
-
-                    <a href="#">Action,</a>
-
-                    <a href="#">Adventure,</a>
-
-                    <a href="#">Science Fiction</a>
+                    {curentMovie.categories?.map((item) => 
+                      <a key={item.id} href="#">{item.name}</a>
+                    )}
                   </div>
 
                   <div className="date-time">
                     <div>
                       <ion-icon name="calendar-outline"></ion-icon>
 
-                      <time datetime="2021">{movie.year}</time>
+                      <time datetime="2021">{curentMovie.year}</time>
                     </div>
 
                     <div>
@@ -147,7 +99,7 @@ export default function Detail() {
                 </div>
 
                 <p className="storyline">
-                  {movie.description}
+                  {curentMovie.description}
                 </p>
 
                 <div className="details-actions">
@@ -161,13 +113,13 @@ export default function Detail() {
                     <p className="title">Prime Video</p>
                     <p className="text">Streaming Channels</p>
                   </div> */}
-                  <Link to={`/watch/${movie.id}`}>
+                  <Link to={`/watch/${curentMovie.id}`}>
                     <button className="btn btn-primary">
                       <ion-icon name="play"></ion-icon>
                       <span>Watch Now</span>
                     </button>
                   </Link>
-                  {/* <Link to={`/watch/${movie.id}`} > */}
+                  {/* <Link to={`/watch/${curentMovie.id}`} > */}
                     <button className="btn btn-primary"  onClick={()=>setShowTrailer(true)}>
                       <ion-icon name="play"></ion-icon>
                       <span>View Trailer</span>
@@ -183,7 +135,7 @@ export default function Detail() {
               <div className="trailer__overlay" onClick={()=>setShowTrailer(false)}></div>
               <div className="trailer__container">
                 <Player>
-                  <source src={movie.trailer} />
+                  <source src={curentMovie.trailer} onError={(e) => e.target.src="/video.mp4"} />
                 </Player>
                 </div>
               </div>
@@ -201,23 +153,25 @@ export default function Detail() {
               </div>
             </div>
             <div className="review__list">
-              {reviews.length > 0 && reviews.map((review, index) => 
-              <div className="review__item">
-                <div className="review__item--head">
-                  <div className="review__item--avatar">
-                    <img src="https://source.unsplash.com/random" alt="" />
+              {curentMovie?.reviews?.length > 0 && 
+              curentMovie?.reviews?.map((review, index) => 
+                <div key={review.id} className="review__item">
+                  <div className="review__item--head">
+                    <div className="review__item--avatar">
+                      <img src={review.users.avatar} alt="" />
+                    </div>
+                    <div className="review__item--name">{review.users.name}</div>
                   </div>
-                  <div className="review__item--name">Nguyn Van A</div>
+                  <div className="review__item--content">
+                    <p>{review.content}</p>
+                    <div className="review__item--star">{review.rating}/5⭐</div>
+                  </div>
                 </div>
-                <div className="review__item--content">
-                  <p>{review.content}</p>
-                  <div className="review__item--star">{review.rating}/5⭐</div>
-                </div>
-              </div>)}
+              )}
               
             </div>
           </section>
-          <MovieList movies={movies}></MovieList>
+          {/* <MovieList movies={movies}></MovieList> */}
         </article>
       </main>
     </div>

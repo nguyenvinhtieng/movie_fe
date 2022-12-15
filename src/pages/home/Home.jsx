@@ -8,17 +8,10 @@ import { getMoviesAPI } from "../../API/movies.api";
 import Header from "../../components/Header/Header";
 import Hero from "../../components/Hero/Hero";
 import MovieList from "../../components/MovieList/MovieList";
+import { getCategoriesAPI } from "../../API/categories.api";
 
 const Home = () => {
-  // // const state = useSelector(state => state)
-  // // console.log("state: ", state)
-  const dispatch = useDispatch();
-  const loadMovie = async () => {
-    await getMoviesAPI(dispatch); 
-  }
-  useEffect(()=> {
-    loadMovie()
-  }, [])
+  
   
   return (
     <div className="homeUser">

@@ -11,8 +11,6 @@ import { getListsAPI } from "./API/lists.api";
 
 const App = () => {
   const dispatch = useDispatch()
-  // const state = useSelector(state => state)
-  // console.log(state)
   useEffect(() => {
     getMoviesAPI(dispatch);
     getCategoriesAPI(dispatch)

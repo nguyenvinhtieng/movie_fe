@@ -6,7 +6,7 @@ export default function MovieList({movies}) {
     <section className="top-rated">
       <div className="containerMovieList">
         <ul className="movies-list">
-          {movies.length === 0 && <h1>Không có phim nào</h1>}
+          {movies.length === 0 && <h1 className="empty">Không có phim nào</h1>}
           {movies.length > 0 && movies.map((movie, index) => (
             <li key={movie.id}>
               <div className="movie-card">

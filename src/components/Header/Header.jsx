@@ -10,7 +10,7 @@ export default function Header() {
         <ul className="navbar-list">
           <li><Link to="/" className="navbar-link">Home</Link></li>
           <li><Link to="/movies" className="navbar-link">Movies</Link></li>
-          <li><Link to="/movies" className="navbar-link">Series</Link></li>
+          <li><Link to="/series" className="navbar-link">Series</Link></li>
           <li><Link to="/chat" className="navbar-link">Chat</Link></li>
           <li><Link to="/buy-vip" className="navbar-link">Buy VIP</Link></li>
         </ul>

@@ -65,6 +65,8 @@ a {
   
   .homeUser {
     background-color: var(--eerie-black);
+    min-height: 100vh;
+    padding-bottom: 50px;
   }
   
   /*-----------------------------------*\
@@ -1598,6 +1600,7 @@ a {
   top: 0;
   left: 0;
   right: 0;
+  z-index: 10;
   .navbarUser {
     max-width: 1200px;
     margin-left: auto;
@@ -1971,4 +1974,8 @@ a {
       }
     }
   }
+}
+
+.empty {
+  color: #fff;
 }

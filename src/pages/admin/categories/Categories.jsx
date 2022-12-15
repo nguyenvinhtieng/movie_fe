@@ -98,6 +98,7 @@ const Categories = () => {
   }, [error]);
 
   function handleClick() {
+    console.log(value)
     if (edit) {
       console.log(value)
       updateCategoryAPI(value.id ,{ name: value.name }, dispatch);
@@ -156,7 +157,7 @@ const Categories = () => {
             label="Tên danh mục"
             defaultValue={value?.name}
             sx={{ width: "100%", marginBottom: 2 }}
-            onChange={(e) => setValue({id: value.id, name: e.target.value })}
+            onChange={(e) => {edit ? setValue({id: value.id, name: e.target.value }): setValue({name: e.target.value })}}
           />
           <LoadingButton
             size="small"
