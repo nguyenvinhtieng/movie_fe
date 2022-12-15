@@ -26,33 +26,50 @@ export default function BuyVip() {
     <div className="homeUser">
       <Header></Header>
       <div className="containerUser">
-      <div className="payment">
-        <div className="payment__wrapper">
-            <div className="payment__inner">
-                <div className="payment__left">
-                    <div className="countdount">Đơn hàng hết hạn sau:<span>{formatCountdownTime(time)}</span></div>
-                    <h1 className="account__name">Tên chủ tài khoản: <span>CONG NGHE JAVA HK1</span></h1>
-                    <p className="info amount">Số tiền: <span>100.000 VNĐ</span></p>
-                    <p className="info id">Đơn hàng: <span>108t3o21iuy213</span></p>
-                    {/* <a className="back">Quay lại</a> */}
-                </div>
-                <div className="payment__right">
-                    <h2>Quét mã để thanh toán</h2>
-                    <div className="img"><img src="/images/qr.webp" alt="QR code"/></div>
-                    <p className="money">Số tiền: <span>120.000 VNĐ</span></p>
-                    <p className="note">Sử dụng camera diện thoại hoặc ứng dụng momo để quét mã</p>
-                    <div className="content">
-                      Nội dung chuyển khoản 
-                      <span>{auth.user.username.toUpperCase()}BUYVIP</span>
-                      <span className="copy" onClick={copyTranferCode}>
-                        {isCopy ? (<i>Copied</i>) : <IoCopy />}
-                      </span>
-                    </div>
-
-                </div>
-            </div>
+        <div className="payment__list">
+          <div className="payment__item">
+            <div className="name">Lorem ipsum dolor sit.</div>
+            <div className="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, alias.</div>
+            <div className="price">$10 <span className='days'>/ 10 days</span></div>
+          </div>
+          <div className="payment__item">
+            <div className="name">Lorem ipsum dolor sit.</div>
+            <div className="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, alias.</div>
+            <div className="price">$10 <span className='days'>/ 10 days</span></div>
+          </div>
+          <div className="payment__item">
+            <div className="name">Lorem ipsum dolor sit.</div>
+            <div className="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, alias.</div>
+            <div className="price">$10 <span className='days'>/ 10 days</span></div>
+          </div>
         </div>
-    </div>
+        <div className="payment">
+          <div className="payment__wrapper">
+              <div className="payment__inner">
+                  <div className="payment__left">
+                      <div className="countdount">Đơn hàng hết hạn sau:<span>{formatCountdownTime(time)}</span></div>
+                      <h1 className="account__name">Tên chủ tài khoản: <span>CONG NGHE JAVA HK1</span></h1>
+                      <p className="info amount">Số tiền: <span>100.000 VNĐ</span></p>
+                      <p className="info id">Đơn hàng: <span>108t3o21iuy213</span></p>
+                      {/* <a className="back">Quay lại</a> */}
+                  </div>
+                  <div className="payment__right">
+                      <h2>Quét mã để thanh toán</h2>
+                      <div className="img"><img src="/images/qr.webp" alt="QR code"/></div>
+                      <p className="money">Số tiền: <span>120.000 VNĐ</span></p>
+                      <p className="note">Sử dụng camera diện thoại hoặc ứng dụng momo để quét mã</p>
+                      <div className="content">
+                        Nội dung chuyển khoản 
+                        <span>{auth.user.username.toUpperCase()}BUYVIP</span>
+                        <span className="copy" onClick={copyTranferCode}>
+                          {isCopy ? (<i>Copied</i>) : <IoCopy />}
+                        </span>
+                      </div>
+
+                  </div>
+              </div>
+          </div>
+        </div>
       </div>
     </div>
   )

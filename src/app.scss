@@ -67,6 +67,7 @@ a {
     background-color: var(--eerie-black);
     min-height: 100vh;
     padding-bottom: 50px;
+    padding-top: 100px;
   }
   
   /*-----------------------------------*\
@@ -1672,7 +1673,7 @@ a {
 }
 
 .payment {
-
+  
     * {
         font-family: 'Poppins', sans-serif;
     }
@@ -1978,4 +1979,38 @@ a {
 
 .empty {
   color: #fff;
+}
+.payment__list {
+  display: flex;
+  flex-wrap: wrap;
+}
+.payment__item {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 4px;
+  width: calc(100% / 3 - 20px);
+  margin: 10px;
+  cursor: pointer;
+  * {
+    font-family: 'Poppins', sans-serif;
+  }
+  .name {
+    text-align: center;
+    font-size: 24px;
+  }
+  .description {
+    font-size: 14px;
+    text-align: center;
+  }
+  .price {
+    font-size: 30px;
+    color: rgb(40, 106, 239);
+    font-weight: bold;
+    text-align: center;
+    .days {
+      font-size: 14px;
+      display: inline-block;
+      color: #333;
+    }
+  }
 }

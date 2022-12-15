@@ -29,6 +29,7 @@ import Movies from "../pages/movies/Movies";
 import BuyVip from "../pages/buy-vip/BuyVip";
 import Chat from "../pages/chat/Chat";
 import SeriesUser from "../pages/series/Series";
+import Payment from "../pages/payment/Payment";
 
 const router = createBrowserRouter([
   {
@@ -149,6 +150,15 @@ const router = createBrowserRouter([
     element: (
       // <ProtectedUserRoute>
         <BuyVip />
+      // </ProtectedUserRoute>
+    ),
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/payment",
+    element: (
+      // <ProtectedUserRoute>
+        <Payment />
       // </ProtectedUserRoute>
     ),
     errorElement: <ErrorPage />,
