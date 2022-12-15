@@ -2,18 +2,33 @@ import { DataGrid } from "@mui/x-data-grid";
 import "./movieList.css";
 import { Link } from "react-router-dom";
 import { DeleteOutline } from "@mui/icons-material";
-import {  useSelector } from "react-redux";
+import {  useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import movieSlice from "../../../store/slice/movieSlice";
+import { useEffect } from "react";
+import { LoadingButton } from "@mui/lab";
 
 const MovieList = () => {
-  const { movies, isFetching, error} = useSelector(state => state.movie);
+  const { movies, isFetching, error, success} = useSelector(state => state.movie);
   
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error)
+    }
+    if (success) {
+      toast.success(success)
+    }
+    dispatch(movieSlice.actions.refreshErrorAndSuccess())
+  },[error, success])
 
   const handleDelete = (id) => {
     
   };
 
   const columns = [
-    { field: "_id", headerName: "ID", width: 200 },
+    { field: "id", headerName: "ID", width: 200 },
     {
       field: "movie",
       headerName: "Movie",
@@ -59,10 +74,16 @@ const MovieList = () => {
             >
               <button className="product-list__button--edit">Edit</button>
             </Link>
-            <DeleteOutline
-              onClick={() => handleDelete(params.row._id)}
-              className="product-list__button--remove"
-            />
+            <LoadingButton
+            size="small"
+            onClick={handleDelete}
+            loading={isFetching}
+            loadingPosition="end"
+            variant="contained"
+            className="add-product-button"
+          >
+            Delete
+          </LoadingButton>
           </div>
         );
       },

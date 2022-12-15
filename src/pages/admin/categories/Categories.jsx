@@ -12,7 +12,6 @@ import LoadingButton from "@mui/lab/LoadingButton";
 import {
   createCategoryAPI,
   deleteCategoryAPI,
-  getCategoriesAPI,
   updateCategoryAPI,
 } from "../../../API/categories.api";
 import { toast } from "react-toastify";
@@ -33,7 +32,7 @@ const style = {
 };
 
 const Categories = () => {
-  const { categories, error, isFetching } = useSelector(
+  const { categories, error, isFetching, success } = useSelector(
     (state) => state.category
   );
   const dispatch = useDispatch();

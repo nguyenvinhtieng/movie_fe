@@ -4,6 +4,7 @@ const initialState = {
     categories: [],
     isFetching: false,
     error: null,
+    success: null
   };
 
 const categorySlice = createSlice({
@@ -37,6 +38,7 @@ const categorySlice = createSlice({
             state.categories = [...state.categories, action.payload]
             state.isFetching = false
             state.error = null
+            state.success = "Tạo thành công!"
         },
         
         createCategoryFailure(state, action) {
@@ -57,6 +59,7 @@ const categorySlice = createSlice({
               )
               state.isFetching = false
               state.error = null
+              state.success = "Cập nhật thành công!"
         },
         
         updateCategoryFailure(state, action) {
@@ -75,6 +78,7 @@ const categorySlice = createSlice({
             state.categories = state.categories.filter((category) => category._id !== action.payload)
             state.isFetching = false
             state.error = null
+            state.success = "Xoá thành công!"
         },
         
         deleteCategoryFailure(state, action) {
