@@ -8,7 +8,8 @@ import { useEffect } from 'react'
 import { getMoviesAPI } from './API/movies.api'
 import { getCategoriesAPI } from './API/categories.api'
 import { getListsAPI } from "./API/lists.api";
-import { getAllPlanAPI } from "./API/plan.api";
+// import { getAllPlanAPI } from "./API/plan.api";
+import { getPlansAPI } from "./API/plans.api";
 
 const App = () => {
   const dispatch = useDispatch()
@@ -16,7 +17,7 @@ const App = () => {
     getMoviesAPI(dispatch);
     getCategoriesAPI(dispatch)
     getListsAPI(dispatch)
-    getAllPlanAPI(dispatch)
+    getPlansAPI(dispatch)
   }, []);
   return (
     <>

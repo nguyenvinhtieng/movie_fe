@@ -2,54 +2,54 @@ import request from "../services/request";
 import categorySlice from "../store/slice/categorySlice";
 import { path } from "./apiPath";
 
-export const getCategoriesAPI = async (dispatch) => {
-    dispatch(categorySlice.actions.getCategoriesStart());
+export const getPlansAPI = async (dispatch) => {
+    dispatch(categorySlice.actions.getPlansStart());
     try {
-      const res = await request("GET", path.getCategories);
-      dispatch(categorySlice.actions.getCategoriesSuccess(res));
+      const res = await request("GET", path.getPlans);
+      dispatch(categorySlice.actions.getPlansSuccess(res));
     } catch (err) {
       console.log(err)
-      dispatch(categorySlice.actions.getCategoriesFailure({error_message: err.message}));
+      dispatch(categorySlice.actions.getPlansFailure({error_message: err.message}));
     }
   };
   
   //create
-  export const createCategoryAPI = async (category, dispatch) => {
-    dispatch(categorySlice.actions.createCategoryStart());
+  export const createPlanAPI = async (category, dispatch) => {
+    dispatch(categorySlice.actions.createPlanStart());
     if (!category.name) {
-      return dispatch(categorySlice.actions.createCategoryFailure({error_message: "Tên danh mục không hợp lệ!"}));
+      return dispatch(categorySlice.actions.createPlanFailure({error_message: "Tên danh mục không hợp lệ!"}));
     }
     try {
-      const res = await request("POST", path.createCategory, {body: category.name});
-      dispatch(categorySlice.actions.createCategorySuccess(res));
+      const res = await request("POST", path.createPlan, {body: category.name});
+      dispatch(categorySlice.actions.createPlanSuccess(res));
     } catch (err) {
       console.log(err)
-      dispatch(categorySlice.actions.createCategoryFailure({error_message: err.message}));
+      dispatch(categorySlice.actions.createPlanFailure({error_message: err.message}));
     }
   };
 
-  export const updateCategoryAPI = async (id, category, dispatch) => {
-    dispatch(categorySlice.actions.updateCategoryStart());
+  export const updatePlanAPI = async (id, category, dispatch) => {
+    dispatch(categorySlice.actions.updatePlanStart());
     if (category.name === "") {
-      return dispatch(categorySlice.actions.updateCategoryFailure({error_message: "Tên danh mục không hợp lệ!"}));
+      return dispatch(categorySlice.actions.updatePlanFailure({error_message: "Tên danh mục không hợp lệ!"}));
     }
     try {
-      const res = await request("PUT", path.updateCategory(id), {body: category.name});
-      dispatch(categorySlice.actions.updateCategorySuccess(res.data));
+      const res = await request("PUT", path.updatePlan(id), {body: category.name});
+      dispatch(categorySlice.actions.updatePlanSuccess(res.data));
     } catch (err) {
       console.log(err)
-      dispatch(categorySlice.actions.updateCategoryFailure({error_message: err.message}));
+      dispatch(categorySlice.actions.updatePlanFailure({error_message: err.message}));
     }
   };
   
   //delete
-  export const deleteCategoryAPI = async (id, dispatch) => {
-    dispatch(categorySlice.actions.deleteCategoryStart());
+  export const deletePlanAPI = async (id, dispatch) => {
+    dispatch(categorySlice.actions.deletePlanStart());
     try {
-      await request("DELETE" , path.deleteCategory(id));
-      dispatch(categorySlice.actions.deleteCategorySuccess(id));
+      await request("DELETE" , path.deletePlan(id));
+      dispatch(categorySlice.actions.deletePlanSuccess(id));
     } catch (err) {
       console.log(err)
-      dispatch(categorySlice.actions.deleteCategoryFailure({error_message: err.message}));
+      dispatch(categorySlice.actions.deletePlanFailure({error_message: err.message}));
     }
   };

@@ -11,9 +11,6 @@ const planSlice = createSlice({
     name: 'planSlice',
     initialState,
     reducers: {
-        getPlansSuccess(state, action) {
-            state.plans = action.payload
-        },
         getPlansStart(state) {
             state.plans = []
             state.isFetching = true

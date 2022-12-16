@@ -100,16 +100,16 @@ const Categories = () => {
   function handleClick() {
     console.log(value)
     if (edit) {
-      updateCategoryAPI(value.id ,{ name: value.name }, dispatch);
+      updatePlanAPI(value.id ,{ name: value.name }, dispatch);
     } else {
-      createCategoryAPI({ name: value.name }, dispatch);
+      createPlanAPI({ name: value.name }, dispatch);
     }
 
     setOpen(false)
   }
 
   const handleDelete = (id) => {
-    deleteCategoryAPI(id, dispatch)
+    deletePlanAPI(id, dispatch)
   };
   
 

@@ -16,6 +16,7 @@ export default function Header() {
   const [name, setName] = React.useState("")
   const [email, setEmail] = React.useState("")
   const [avatar, setAvatar] = React.useState(null)
+
   const upload = () => {
     console.log(avatar)
     const fileName = new Date().getTime() + avatar[0].name;
@@ -65,6 +66,10 @@ export default function Header() {
     }
     upload()
   }
+
+  const handleLogout = () => {
+    dispatch(authSlice.actions.logout())
+  }
   return (
     <header className="headerUser" data-header>
       <CustomModal title="Change my information" isOpen={isOpen} setIsOpen={setIsOpen} handleSubmit={handleUpdateInfo}>
@@ -92,7 +97,7 @@ export default function Header() {
         <ul className="navbar-list">
           <li><span className="name">Hello {auth.user?.name || "Anonymous"}</span></li>
           <li><span className="name" onClick={() => setIsOpen(true)}>Change info</span></li>
-          <li><Link to="/" className="navbar-link">Logout</Link></li>
+          <li><button className="navbar-link" onClick={handleLogout}>Logout</button></li>
         </ul>
       </nav>
     </header>
