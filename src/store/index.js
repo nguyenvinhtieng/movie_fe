@@ -5,7 +5,6 @@ import movieSlice from "./slice/movieSlice";
 import categorySlice from "./slice/categorySlice";
 import planSlice from "./slice/planSlice";
 import modalSlice from "./slice/modalSlice";
-import planSlice from "./slice/planSlice";
 
 const store = configureStore({
     reducer: {

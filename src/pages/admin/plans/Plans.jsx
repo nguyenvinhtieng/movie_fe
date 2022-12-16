@@ -13,7 +13,7 @@ import {
   createPlanAPI,
   deletePlanAPI,
   updatePlanAPI,
-} from "../../../API/plan.api";
+} from "../../../API/plans.api";
 import { toast } from "react-toastify";
 
 const style = {
