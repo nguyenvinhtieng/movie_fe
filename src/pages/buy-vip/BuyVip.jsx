@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { IoCopy } from "react-icons/io5";
 import { useSelector } from 'react-redux';
+import socketIO from 'socket.io-client';
 import { toast } from 'react-toastify';
 import { path } from '../../API/apiPath';
 import CustomModal from '../../components/CustomModal/CustomModal';
 import Header from '../../components/Header/Header'
 import request from '../../services/request';
+const socket = socketIO.connect('http://localhost:1701');
+
+
 function formatCountdownTime(time) {
   let minutes = Math.floor(time / 60);
   let seconds = time - minutes * 60;
@@ -13,6 +17,7 @@ function formatCountdownTime(time) {
 }
 export default function BuyVip() {
   const {auth, plan} = useSelector(state => state)
+  const [historyPayment, setHistoryPayment] = useState([])
   const [time, setTime] = useState(10*60); // 10 minutes
   const [isCopy, setIsCopy] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -23,6 +28,21 @@ export default function BuyVip() {
     }, 1000)
     return () => clearInterval(timer);
   }, [])
+  const fetchHisotryPayment = async () => {
+    const res = await request("GET", path.billing);
+    setHistoryPayment(res)
+  }
+  useEffect(() => {
+    fetchHisotryPayment()
+  }, [])
+  // socket
+  useEffect(() => {
+    if(!socket) return
+    socket.on('biling', () => {
+      fetchHisotryPayment()
+    })
+  }, [socket])
+
 
   const copyTranferCode = () => {
     navigator.clipboard.writeText(`${auth.user.username.toUpperCase()}BUYVIP`);
@@ -42,6 +62,7 @@ export default function BuyVip() {
     }});
     setIsOpen(false)
     toast.success("Please wait for the admin to confirm your payment")
+    fetchHisotryPayment()
   }
 
   return (
@@ -87,7 +108,30 @@ export default function BuyVip() {
             </div>
           </div>
         </CustomModal>
-        
+        <div className="payment__history">
+          <h1>Payment history</h1>
+          <table>
+            <tr>
+              <th>ID</th>
+              <th>Amount</th>
+              <th>Payment</th>
+              <th>Plan</th>
+              <th>Description</th>
+              <th>Status</th>
+            </tr>
+            {historyPayment?.length > 0 && historyPayment.map((item, index) =>
+              <tr key={item.id}>
+                <td>{item.id}</td>
+                <td>{item.amount}</td>
+                <td>{item.payment}</td>
+                <td>{item.plan.name}</td>
+                <td>{item.description}</td>
+                <td>{item.confirmed ? "Confirm" : "Not Confirm"}</td>
+              </tr>
+            )}
+            
+          </table>
+        </div>
       </div>
     </div>
   )

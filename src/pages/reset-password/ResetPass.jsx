@@ -5,17 +5,18 @@ import { toast } from "react-toastify";
 import { path } from "../../API/apiPath";
 import Header from "../../components/Header/Header";
 import request from "../../services/request";
-
+import { useNavigate } from "react-router-dom";
 export default function ResetPass() {
   const [password, setPassword] = React.useState("");
   const location = useLocation();
   let token = location.pathname.split("/")[2];
+  const navigate = useNavigate();
 
   const handleReset = async () => {
     if(!password) return toast.error("Please enter your new password")
     const res = await request("POST", path.verifyPath, {body: {token, password}})
-    console.log("res: ", res)
     toast.success("Reset password successfully");
+    navigate("/");
   }
   return (
     <>

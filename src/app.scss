@@ -2104,3 +2104,17 @@ a {
     }
   }
 }
+.payment__history {
+  margin-top: 50px;
+  color:#fff;
+  * {
+    font-family: "Poppins", sans-serif;
+  }
+  table {
+    width: 100%;
+  }
+  tr td, tr th {
+    padding: 10px 20;
+    text-align: left;
+  }
+}
