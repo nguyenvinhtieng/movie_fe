@@ -5,7 +5,7 @@ import { createBrowserRouter } from "react-router-dom";
 import UserList from "../pages/admin/userList/UserList";
 // import User from "../pages/admin/user/User";
 
-// import Movie from "../pages/admin/movie/Movie";
+import Movie from "../pages/admin/movie/Movie";
 import MovieList from "../pages/admin/movieList/MovieList";
 import AddMovie from "../pages/admin/addMovie/AddMovie";
 
@@ -23,6 +23,7 @@ import HomeAdmin from "../pages/admin/home/HomeAdmin";
 import Register from "../pages/register/Register";
 import Admin from "../pages/admin/Admin";
 import Categories from "../pages/admin/categories/Categories";
+import Plans from "../pages/admin/plans/Plans";
 import Detail from "../pages/detail/Detail";
 import Watch from "../pages/watch/Watch";
 import Movies from "../pages/movies/Movies";
@@ -66,6 +67,10 @@ const router = createBrowserRouter([
         element: <Categories />
       },
       {
+        path: "plans",
+        element: <Plans />
+      },
+      {
         path: "users",
         element: <UserList />
       },
@@ -81,10 +86,10 @@ const router = createBrowserRouter([
         path: "movies",
         element: <MovieList />
       },
-      // {
-      //   path: "movie/:id",
-      //   element: <Movie />,
-      // },
+      {
+        path: "movies/:id",
+        element: <Movie />,
+      },
       {
         path: "new-movie",
         element: <AddMovie />

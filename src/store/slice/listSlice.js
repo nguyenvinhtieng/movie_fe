@@ -29,7 +29,6 @@ const listSlice = createSlice({
         },
         
         createListStart(state) {
-            state = {...state}
             state.isFetching = true
             state.error = null 
         },
@@ -42,20 +41,18 @@ const listSlice = createSlice({
         },
         
         createListFailure(state, action) {
-            state = {...state}
             state.isFetching = false
             state.error = action.payload.error_message
         },
         
         updateListStart(state) {
-            state = {...state}
             state.isFetching = true
             state.error = null
         },
         
         updateListSuccess(state, action) {
             state.lists = state.lists.map(
-                (movie) => movie._id === action.payload._id && action.payload
+                (movie) => movie.id === action.payload.id && action.payload
               )
               state.isFetching = false
               state.error = null
@@ -63,13 +60,11 @@ const listSlice = createSlice({
         },
         
         updateListFailure(state, action) {
-            state = {...state}
             state.isFetching = false
             state.error = action.payload.error_message
         },
         
         deleteListStart(state) {
-                state = {...state}
                 state.isFetching = true
                 state.error = null
         },
@@ -82,7 +77,6 @@ const listSlice = createSlice({
         },
         
         deleteListFailure(state, action) {
-            state = {...state}
             state.isFetching = false
             state.error = action.payload.error_message
         },

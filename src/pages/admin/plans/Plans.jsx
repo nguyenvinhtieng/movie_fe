@@ -10,10 +10,10 @@ import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 import LoadingButton from "@mui/lab/LoadingButton";
 import {
-  createCategoryAPI,
-  deleteCategoryAPI,
-  updateCategoryAPI,
-} from "../../../API/categories.api";
+  createPlanAPI,
+  deletePlanAPI,
+  updatePlanAPI,
+} from "../../../API/plan.api";
 import { toast } from "react-toastify";
 
 const style = {

@@ -44,6 +44,12 @@ const SideBar = () => {
                                 Categories
                             </div>
                         </Link>
+                        <Link to="/admin/plans">
+                            <div className="side-bar__list--item">
+                                <PermIdentity className="side-bar__icon"/>
+                                Plans
+                            </div>
+                        </Link>
                         <Link to="/admin/series">
                             <div className="side-bar__list--item">
                                 <PermIdentity className="side-bar__icon"/>

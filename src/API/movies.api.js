@@ -34,6 +34,16 @@ export const getMoviesAPI = async (dispatch) => {
       dispatch(movieSlice.actions.updateMovieFailure({error_message: err.message}));
     }
   };
+
+  export const activeMovieAPI = async (id, status, dispatch) => {
+    dispatch(movieSlice.actions.updateMovieStart());
+    try {
+      const res = await request("PUT", path.activeMovie(id, status));
+      dispatch(movieSlice.actions.updateMovieSuccess(res));
+    } catch (err) {
+      dispatch(movieSlice.actions.updateMovieFailure({error_message: err.message}));
+    }
+  };
   
   //delete
   export const deleteMovieAPI = async (id, dispatch) => {

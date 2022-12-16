@@ -29,7 +29,6 @@ const categorySlice = createSlice({
         },
         
         createCategoryStart(state) {
-            state = {...state}
             state.isFetching = true
             state.error = null 
         },
@@ -42,13 +41,11 @@ const categorySlice = createSlice({
         },
         
         createCategoryFailure(state, action) {
-            state = {...state}
             state.isFetching = false
             state.error = action.payload.error_message
         },
         
         updateCategoryStart(state) {
-            state = {...state}
             state.isFetching = true
             state.error = null
         },
@@ -63,29 +60,30 @@ const categorySlice = createSlice({
         },
         
         updateCategoryFailure(state, action) {
-            state = {...state}
             state.isFetching = false
             state.error = action.payload.error_message
         },
         
         deleteCategoryStart(state) {
-                state = {...state}
                 state.isFetching = true
                 state.error = null
         },
         
         deleteCategorySuccess(state, action) {
-            state.categories = state.categories.filter((category) => category._id !== action.payload)
+            state.categories = state.categories.filter((category) => category.id !== action.payload)
             state.isFetching = false
             state.error = null
             state.success = "Xoá thành công!"
         },
         
         deleteCategoryFailure(state, action) {
-            state = {...state}
             state.isFetching = false
             state.error = action.payload.error_message
         },
+        refreshErrorAndSuccess(state) {
+            state.error = null
+            state.success = null
+        }
     }
   })
   
