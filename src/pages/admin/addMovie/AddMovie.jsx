@@ -20,11 +20,10 @@ const AddMovie = () => {
   const [trailer, setTrailer] = useState(null);
   const [video, setVideo] = useState(null);
   const [uploaded, setUploaded] = useState(0);
-  const navigate = useNavigate();
 
   const { categories } = useSelector((state) => state.category);
   const series = useSelector((state) => state.list.lists.filter(el => el.type === "series"));
-  const { error, success, isFetching } = useSelector((state) => state.movie);
+  const { error, success } = useSelector((state) => state.movie);
   
 
   const dispatch = useDispatch();
@@ -60,7 +59,7 @@ const AddMovie = () => {
       const fileName = new Date().getTime() + item.label + item.file.name;
       const storageRef = ref(storage, `/videos/${fileName}`);
 
-      const uploadTask = uploadBytesResumable(storageRef, item);
+      const uploadTask = uploadBytesResumable(storageRef, item.file);
       uploadTask.on(
         "state_changed",
         (snapshot) => {
@@ -96,7 +95,6 @@ const AddMovie = () => {
 
   const handleUpload = (e) => {
     e.preventDefault();
-    console.log(imgSm, imgTitle, trailer, video);
     if (!imgSm || !imgTitle || !trailer || !video) {
       return toast.error("Chưa đầy đủ hình ảnh và video!")
     }
@@ -110,7 +108,6 @@ const AddMovie = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-		console.log(movie);
 
     createMovieAPI(movie, dispatch);
     // navigate("/admin/movies");
@@ -164,7 +161,7 @@ const AddMovie = () => {
           <input
             type="text"
             placeholder="Movie description"
-            name="desc"
+            name="description"
             onChange={handleChange}
           />
         </div>
@@ -227,8 +224,8 @@ const AddMovie = () => {
         <div className="add-product-item">
           <label>Status?</label>
           <select name="active" id="isSeries" onChange={handleChange}>
-            <option value="0">No</option>
-            <option value="1" selected>Yes</option>
+            <option value="0">Disable</option>
+            <option value="1" selected>Active</option>
           </select>
         </div>
         <div className="add-product-item">

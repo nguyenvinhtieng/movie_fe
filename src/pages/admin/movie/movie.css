@@ -71,12 +71,22 @@
 
 .product-form {
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
+}
+
+.addProductItem {
+    margin: 10px;
+}
+
+.addProductItem > input {
+    border: 1px solid #000;
 }
 
 .product__form-left {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex: 1;
+    flex-wrap: wrap;
 }
 
 .product__form-left>label {

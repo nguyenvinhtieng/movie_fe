@@ -8,6 +8,7 @@ export const getCategoriesAPI = async (dispatch) => {
       const res = await request("GET", path.getCategories);
       dispatch(categorySlice.actions.getCategoriesSuccess(res));
     } catch (err) {
+      console.log(err)
       dispatch(categorySlice.actions.getCategoriesFailure({error_message: err.message}));
     }
   };
@@ -22,6 +23,7 @@ export const getCategoriesAPI = async (dispatch) => {
       const res = await request("POST", path.createCategory, {body: category.name});
       dispatch(categorySlice.actions.createCategorySuccess(res));
     } catch (err) {
+      console.log(err)
       dispatch(categorySlice.actions.createCategoryFailure({error_message: err.message}));
     }
   };
@@ -35,6 +37,7 @@ export const getCategoriesAPI = async (dispatch) => {
       const res = await request("PUT", path.updateCategory(id), {body: category.name});
       dispatch(categorySlice.actions.updateCategorySuccess(res.data));
     } catch (err) {
+      console.log(err)
       dispatch(categorySlice.actions.updateCategoryFailure({error_message: err.message}));
     }
   };
@@ -46,6 +49,7 @@ export const getCategoriesAPI = async (dispatch) => {
       await request("DELETE" , path.deleteCategory(id));
       dispatch(categorySlice.actions.deleteCategorySuccess(id));
     } catch (err) {
+      console.log(err)
       dispatch(categorySlice.actions.deleteCategoryFailure({error_message: err.message}));
     }
   };

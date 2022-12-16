@@ -1,57 +1,57 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    categories: [],
+    plans: [],
     isFetching: false,
     error: null,
     success: null
   };
 
-const categorySlice = createSlice({
-    name: 'categorySlice',
+const planSlice = createSlice({
+    name: 'planSlice',
     initialState,
     reducers: {
-        getCategoriesStart(state) {
-            state.categories = []
+        getPlansStart(state) {
+            state.plans = []
             state.isFetching = true
             state.error = null
         },
-        getCategoriesSuccess(state, action) {
-            state.categories = action.payload
+        getPlansSuccess(state, action) {
+            state.plans = action.payload
             state.isFetching = false
             state.error = null
         },
         
-        getCategoriesFailure(state, action) {
-            state.categories = []
+        getPlansFailure(state, action) {
+            state.plans = []
             state.isFetching= false
             state.error= action.payload.error_message
         },
         
-        createCategoryStart(state) {
+        createPlanStart(state) {
             state.isFetching = true
             state.error = null 
         },
         
-        createCategorySuccess(state, action) {
-            state.categories = [...state.categories, action.payload]
+        createPlanSuccess(state, action) {
+            state.plans = [...state.plans, action.payload]
             state.isFetching = false
             state.error = null
             state.success = "Tạo thành công!"
         },
         
-        createCategoryFailure(state, action) {
+        createPlanFailure(state, action) {
             state.isFetching = false
             state.error = action.payload.error_message
         },
         
-        updateCategoryStart(state) {
+        updatePlanStart(state) {
             state.isFetching = true
             state.error = null
         },
         
-        updateCategorySuccess(state, action) {
-            state.categories = state.categories.map(
+        updatePlanSuccess(state, action) {
+            state.plans = state.plans.map(
                 (category) => category.id === action.payload.id ? action.payload : category
               )
               state.isFetching = false
@@ -59,24 +59,24 @@ const categorySlice = createSlice({
               state.success = "Cập nhật thành công!"
         },
         
-        updateCategoryFailure(state, action) {
+        updatePlanFailure(state, action) {
             state.isFetching = false
             state.error = action.payload.error_message
         },
         
-        deleteCategoryStart(state) {
+        deletePlanStart(state) {
                 state.isFetching = true
                 state.error = null
         },
         
-        deleteCategorySuccess(state, action) {
-            state.categories = state.categories.filter((category) => category.id !== action.payload)
+        deletePlanSuccess(state, action) {
+            state.plans = state.plans.filter((category) => category.id !== action.payload)
             state.isFetching = false
             state.error = null
             state.success = "Xoá thành công!"
         },
         
-        deleteCategoryFailure(state, action) {
+        deletePlanFailure(state, action) {
             state.isFetching = false
             state.error = action.payload.error_message
         },
@@ -87,4 +87,4 @@ const categorySlice = createSlice({
     }
   })
   
-export default categorySlice;
+export default planSlice;
