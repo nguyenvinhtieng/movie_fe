@@ -9,11 +9,11 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 import LoadingButton from "@mui/lab/LoadingButton";
-import {
-  createPlanAPI,
-  deletePlanAPI,
-  updatePlanAPI,
-} from "../../../API/plans.api";
+// import {
+//   createPlanAPI,
+//   deletePlanAPI,
+//   updatePlanAPI,
+// } from "../../../API/plans.api";
 import { toast } from "react-toastify";
 
 const style = {
@@ -32,98 +32,98 @@ const style = {
 };
 
 const Categories = () => {
-  const { categories, error, isFetching, success } = useSelector(
-    (state) => state.category
-  );
-  const dispatch = useDispatch();
-  const [open, setOpen] = useState(false);
-  const [edit, setEdit] = useState(false);
-  const [value, setValue] = useState(null);
+  // const { categories, error, isFetching, success } = useSelector(
+  //   (state) => state.category
+  // );
+  // const dispatch = useDispatch();
+  // const [open, setOpen] = useState(false);
+  // const [edit, setEdit] = useState(false);
+  // const [value, setValue] = useState(null);
 
-  const columns = [
-    { field: "id", headerName: "ID", width: 90 },
-    {
-      field: "name",
-      headerName: "Tên danh mục",
-      width: 280,
-    },
-    {
-      field: "updatedAt",
-      headerName: "Ngày cập nhật gần nhất",
-      width: 300,
-      editable: true,
-    },
-    {
-      field: "createdAt",
-      headerName: "Ngày khởi tạo",
-      width: 300,
-      editable: true,
-    },
-    {
-      field: "action",
-      headerName: "Action",
-      width: 140,
-      renderCell: (params) => {
-        return (
-          <div className="categories-list__action">
-            <button
-              className="categories-list__button--edit"
-              onClick={() => handleEdit(params.row.id)}
-            >
-              Edit
-            </button>
+  // const columns = [
+  //   { field: "id", headerName: "ID", width: 90 },
+  //   {
+  //     field: "name",
+  //     headerName: "Tên danh mục",
+  //     width: 280,
+  //   },
+  //   {
+  //     field: "updatedAt",
+  //     headerName: "Ngày cập nhật gần nhất",
+  //     width: 300,
+  //     editable: true,
+  //   },
+  //   {
+  //     field: "createdAt",
+  //     headerName: "Ngày khởi tạo",
+  //     width: 300,
+  //     editable: true,
+  //   },
+  //   {
+  //     field: "action",
+  //     headerName: "Action",
+  //     width: 140,
+  //     renderCell: (params) => {
+  //       return (
+  //         <div className="categories-list__action">
+  //           <button
+  //             className="categories-list__button--edit"
+  //             onClick={() => handleEdit(params.row.id)}
+  //           >
+  //             Edit
+  //           </button>
 
-            <DeleteOutline
-              onClick={() => handleDelete(params.row.id)}
-              className="user-list__button--remove"
-            />
-          </div>
-        );
-      },
-    },
-  ];
+  //           <DeleteOutline
+  //             onClick={() => handleDelete(params.row.id)}
+  //             className="user-list__button--remove"
+  //           />
+  //         </div>
+  //       );
+  //     },
+  //   },
+  // ];
 
-  const handleOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setEdit(false);
-    setOpen(false);
-  };
+  // const handleOpen = () => {
+  //   setOpen(true);
+  // };
+  // const handleClose = () => {
+  //   setEdit(false);
+  //   setOpen(false);
+  // };
 
-  useEffect(() => {
-    if (error) {
-      toast.error(error);
-    }
-  }, [error]);
+  // useEffect(() => {
+  //   if (error) {
+  //     toast.error(error);
+  //   }
+  // }, [error]);
 
-  function handleClick() {
-    console.log(value)
-    if (edit) {
-      updateCategoryAPI(value.id ,{ name: value.name }, dispatch);
-    } else {
-      createCategoryAPI({ name: value.name }, dispatch);
-    }
+  // function handleClick() {
+  //   console.log(value)
+  //   if (edit) {
+  //     updatePlanAPI(value.id ,{ name: value.name }, dispatch);
+  //   } else {
+  //     createPlanAPI({ name: value.name }, dispatch);
+  //   }
 
-    setOpen(false)
-  }
+  //   setOpen(false)
+  // }
 
-  const handleDelete = (id) => {
-    deleteCategoryAPI(id, dispatch)
-  };
+  // const handleDelete = (id) => {
+  //   deletePlanAPI(id, dispatch)
+  // };
   
 
-  const handleEdit = (id) => {
-    const editValue = categories.find((el) => el.id === id);
+  // const handleEdit = (id) => {
+  //   const editValue = categories.find((el) => el.id === id);
     
-    setEdit(true);
-    setValue(editValue);
-    setOpen(true);
-  };
+  //   setEdit(true);
+  //   setValue(editValue);
+  //   setOpen(true);
+  // };
 
   return (
     <>
-      <div className="categories-list">
+      {/* <div className="categories-list">
         <button className="categories-add--button" onClick={handleOpen}>
           Thêm danh mục
         </button>
@@ -168,7 +168,7 @@ const Categories = () => {
             {!edit ? "Tạo mới" : "Chỉnh sửa"}
           </LoadingButton>
         </Box>
-      </Modal>
+      </Modal> */}
     </>
   );
 };

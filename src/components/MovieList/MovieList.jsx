@@ -7,12 +7,12 @@ export default function MovieList({movies}) {
       <div className="containerMovieList">
         <ul className="movies-list">
           {movies.length === 0 && <h1 className="empty">Không có phim nào</h1>}
-          {movies.length > 0 && movies.map((movie, index) => (
+          {movies.length > 0 && movies.map((movie, _) => (
             <li key={movie.id}>
               <div className="movie-card">
                 <Link to={`/detail/${movie.id}`}>
                   <figure className="card-banner">
-                    <img src={movie.imgTitle} alt="" />
+                    <img src={movie.imgTitle} onError={(e) => e.target.src = "/images/movie-1.png"} alt="" />
                   </figure>
                 </Link>
 

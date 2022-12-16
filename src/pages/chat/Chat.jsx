@@ -1,14 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { useSelector } from 'react-redux';
 import socketIO from 'socket.io-client';
 import { path } from '../../API/apiPath'
 import Header from '../../components/Header/Header'
 import request from '../../services/request'
-// const socket = socketIO.connect('http://localhost:1701');
+const socket = socketIO.connect('http://localhost:1701');
 
 export default function Chat() {
   const [chats, setChats] = useState([])
   const contentRef = useRef()
-
+  const { auth } = useSelector(state => state)
   const fetchChatData = async () => {
     const res = await request("GET", path.getChat)
     setChats(res)
@@ -17,14 +18,29 @@ export default function Chat() {
     fetchChatData()
   }, [])
   // socket
-  // useEffect(() => {
-  //   console.log("socket: ", socket)
-  // }, [])
+  useEffect(() => {
+    if(!socket) return
+    console.log("s: ", socket)
+      socket.on('get_message', (data) => {
+        setChats(prev => {
+          let newData = [...prev, data]
+          let unique = [...new Set(newData.map(item => item.id))].map(id => {
+            return newData.find(item => item.id === id)
+          })
+          return unique
+        })
+      })
+    // }
+  }, [socket])
 
   const handleSendMessage = async () => {
     const content = contentRef.current.value
-    
-    console.log("content: ", content)
+    if(!content) return
+    socket.emit('send_message', {message: content, uid: auth?.user?.id})
+    contentRef.current.value = ''
+    setTimeout(() => {
+      fetchChatData()
+    }, 1000)
   }
 
 
@@ -35,7 +51,7 @@ export default function Chat() {
         <div className="chat">
           <div className="chat__wrapper">
             <div className="chat__content">
-              {chats.length > 0 && chats.map((chat, index) => 
+              {chats.length > 0 && chats.map((chat, _) => 
                 <div className="chat__content__item" key={chat.id}>
                   <span className="info">
                     <div className="avatar">

@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { IoCopy } from "react-icons/io5";
 import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import { path } from '../../API/apiPath';
 import CustomModal from '../../components/CustomModal/CustomModal';
 import Header from '../../components/Header/Header'
+import request from '../../services/request';
 function formatCountdownTime(time) {
   let minutes = Math.floor(time / 60);
   let seconds = time - minutes * 60;
@@ -30,8 +33,15 @@ export default function BuyVip() {
     setPaymentInfo(plan.plans.find(item => item.id === id))
     setIsOpen(true)
   }
-  const payment = () => {
-    console.log("payment")
+  const payment = async () => {
+    const res = await request("POST", path.billing, {body: {
+      amount: paymentInfo.price,
+      payment: "momo",
+      planId: paymentInfo.id,
+      description: paymentInfo.description
+    }});
+    setIsOpen(false)
+    toast.success("Please wait for the admin to confirm your payment")
   }
 
   return (
@@ -47,7 +57,7 @@ export default function BuyVip() {
           </div>
           )}
         </div>
-        <CustomModal button="Payment" title="Payment" isOpen={isOpen} setIsOpen={setIsOpen} handleSubmit={payment}>
+        <CustomModal size="md" button="Payment" title="Payment" isOpen={isOpen} setIsOpen={setIsOpen} handleSubmit={payment}>
           <div className="payment">
             <div className="payment__wrapper">
                 <div className="payment__inner">
@@ -62,8 +72,7 @@ export default function BuyVip() {
                         <h2>Quét mã để thanh toán</h2>
                         <div className="img"><img src="/images/qr.webp" alt="QR code"/></div>
                         <p className="money">Số tiền: <span>{paymentInfo.price}</span></p>
-                        <span className="">Gói: {paymentInfo.name} ({paymentInfo.description})</span>
-                        <span className="">$ {paymentInfo.price} / {paymentInfo.days} days</span>
+                        <span className="">Gói: {paymentInfo.name} ({paymentInfo.description}) [ $ {paymentInfo.price} / {paymentInfo.days} days ]</span>
                         <p className="note">Sử dụng camera diện thoại hoặc ứng dụng momo để quét mã</p>
                         <div className="content">
                           Nội dung chuyển khoản 

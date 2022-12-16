@@ -28,7 +28,7 @@ export const getCategoriesAPI = async (dispatch) => {
     }
   };
 
-  export const updateCategoryAPI = async (id, category, dispatch) => {
+  export const updatePlanAPI = async (id, category, dispatch) => {
     dispatch(categorySlice.actions.updateCategoryStart());
     if (category.name === "") {
       return dispatch(categorySlice.actions.updateCategoryFailure({error_message: "Tên danh mục không hợp lệ!"}));

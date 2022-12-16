@@ -31,6 +31,7 @@ import BuyVip from "../pages/buy-vip/BuyVip";
 import Chat from "../pages/chat/Chat";
 import SeriesUser from "../pages/series/Series";
 import Payment from "../pages/payment/Payment";
+import ResetPass from "../pages/reset-password/ResetPass";
 
 const router = createBrowserRouter([
   {
@@ -182,6 +183,15 @@ const router = createBrowserRouter([
     element: (
       // <ProtectedUserRoute>
         <SeriesUser />
+      // </ProtectedUserRoute>
+    ),
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/reset-password/*",
+    element: (
+      // <ProtectedUserRoute>
+        <ResetPass />
       // </ProtectedUserRoute>
     ),
     errorElement: <ErrorPage />,

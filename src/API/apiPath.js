@@ -1,6 +1,8 @@
 export const path = {
     register: '/api/auth/signup',
     login: '/api/auth/signin',
+    resetPass: "/api/auth/reset-password",
+    verifyPath: "/api/auth/reset-verify",
     getLists: `/api/seri`,
     createList: `/api/admin/series/`,
     updateList: (id) => `/api/admin/series/${id}`,
@@ -23,4 +25,5 @@ export const path = {
     createPlan: `/api/admin/plans/`,
     deletePlan: (id) => `/api/admin/plans/${id}`,
     updatePlan: (id) => `/api/admin/plans/${id}`,
+    billing: `/api/billing`,
 }
