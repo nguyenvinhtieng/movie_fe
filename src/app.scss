@@ -1677,7 +1677,6 @@ a {
     * {
         font-family: 'Poppins', sans-serif;
     }
-    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1842,9 +1841,11 @@ a {
 // Chat
 .chat {
   min-height: 100vh;
-  padding-top: 100px;
   color: #fff;
   padding-bottom: 20px;
+  * {
+    font-family: "Poppins", sans-serif;
+  }
   &__wrapper {
     height: calc(100vh - 120px);
     display: flex;
@@ -1872,29 +1873,38 @@ a {
       margin-bottom: 6px;
       display: flex;
       font-size: 16px;
+      .info {
+        display: flex;
+        gap: 6px;
+      }
+      .avatar {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        overflow: hidden;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
       .name {
         font-weight: bold;
       }
       .message {
-        // background-color: #fff;
-        // padding: 10px 20px;
-        // color: #333;
-        // width: fit-content;
-        // border-radius: 4px;
-        // margin-top: 5px;
         margin-left: 8px;
       }
     }
   }
   &__input {
     display: flex;
+    margin-top: 20px;
     textarea {
       flex: 1;
       border: 1px solid #999;
       outline: none;
-      padding: 4px 6px;
+      padding: 10px 20px;
       border-radius: 4px;
-      font-family: "Popins", sans-serif;
+      font-family: "Poppins", sans-serif;
     }
     button {
       padding: 10px 20px;
@@ -1902,6 +1912,10 @@ a {
       color:#fff;
       font-family: "Popins", sans-serif;
       outline: none;
+      transition: all 0.2s linear;
+      &:hover {
+        opacity: 0.7;
+      }
     }
   }
 }
@@ -2022,4 +2036,15 @@ a {
   }
 }
 
-//  Modal
+.btnDel {
+  padding: 6px 12px;
+  font-size: 12px;
+  color: #fff;
+  background-color: rgb(245, 45, 45);
+  margin-top: 3px;
+  border-radius: 4px;
+  transition: all 0.2s linear;
+  &:hover {
+    opacity: 0.7;
+  }
+}

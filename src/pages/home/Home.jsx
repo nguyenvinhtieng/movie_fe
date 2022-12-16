@@ -9,6 +9,7 @@ import Header from "../../components/Header/Header";
 import Hero from "../../components/Hero/Hero";
 import MovieList from "../../components/MovieList/MovieList";
 import { getCategoriesAPI } from "../../API/categories.api";
+import CustomModal from "../../components/CustomModal/CustomModal";
 
 const Home = () => {
   
@@ -16,6 +17,7 @@ const Home = () => {
   return (
     <div className="homeUser">
       <Header></Header>
+      <CustomModal></CustomModal>
       <main>
         <article>
           <Hero></Hero>

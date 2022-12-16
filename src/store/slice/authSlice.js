@@ -62,6 +62,10 @@ const authSlice = createSlice({
         state.refreshToken = null;
         state.loadingLogin = false;
         state.error = action.payload.err
+      },
+      updateInfo(state, action){
+        localStorage.setItem("user", JSON.stringify(action.payload.user));
+        state.user = action.payload.user;
       }
     },
   });

@@ -13,20 +13,22 @@ import { useEffect } from "react";
 import axios from "axios";
 import request from "../../services/request";
 import { path } from "../../API/apiPath";
+import CustomModal from "../../components/CustomModal/CustomModal";
 
 export default function Detail() {
   const {movie, auth} = useSelector((state) => state);
   const [curentMovie, setCurentMovie] = useState({});
   const [showTrailer, setShowTrailer] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [rating, setRating] = useState(0);
   const reviewContentRef = useRef();
   const location = useLocation();
+  const reviewIdRef = useRef();
   let movieId = location.pathname.split("/")[2];
   useEffect(()=>{
     if(movie.movies.length > 0) 
       setCurentMovie(movie?.movies?.find(item => item.id == movieId))
   }, [movie.movies])
-
   const saveReview = async () => {
     let content = reviewContentRef.current.value;
     if(content.trim() === "") return;
@@ -41,10 +43,24 @@ export default function Detail() {
     reviewContentRef.current.value = "";
     setRating(0);
   }
+  const showConfirmDelete = async (reviewId) => {
+    setIsOpen(true);
+    reviewIdRef.current = reviewId;
+  }
+  const deleteReview = async () => {
+    const res = await request("DELETE", path.deleteReview(reviewIdRef.current));
+    setIsOpen(false);
+    let newMovie = {...curentMovie};
+    newMovie.reviews = newMovie.reviews.filter(item => item.id !== reviewIdRef.current);
+    setCurentMovie(newMovie);
+  }
 
   return (
     <div className="homeUser">
       <Header></Header>
+      <CustomModal title="delete review" button="Delete" danger={true} isOpen={isOpen} setIsOpen={setIsOpen} handleSubmit={deleteReview}>
+        Are you sure?
+      </CustomModal>
       <main>
         <article>
           <section className="movie-detail">
@@ -160,6 +176,7 @@ export default function Detail() {
                     <p>{review.content}</p>
                     <div className="review__item--star">{review.rating}/5⭐</div>
                   </div>
+                  {review?.users?.id == auth?.user?.id && <button className="btnDel" onClick={()=>showConfirmDelete(review.id)}>Xóa</button>}
                 </div>
               )}
               

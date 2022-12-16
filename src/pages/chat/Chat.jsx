@@ -1,18 +1,33 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+import socketIO from 'socket.io-client';
+import { path } from '../../API/apiPath'
 import Header from '../../components/Header/Header'
+import request from '../../services/request'
+// const socket = socketIO.connect('http://localhost:1701');
 
 export default function Chat() {
   const [chats, setChats] = useState([])
+  const contentRef = useRef()
+
+  const fetchChatData = async () => {
+    const res = await request("GET", path.getChat)
+    setChats(res)
+  }
   useEffect(() => {
-    let chatFetch = new Array(200).fill({}).map((_, index) => {
-      return {
-        id: index,
-        name: 'Nguyen Van A',
-        message: 'Hello'
-      }
-    })
-    setChats(chatFetch)
+    fetchChatData()
   }, [])
+  // socket
+  // useEffect(() => {
+  //   console.log("socket: ", socket)
+  // }, [])
+
+  const handleSendMessage = async () => {
+    const content = contentRef.current.value
+    
+    console.log("content: ", content)
+  }
+
+
   return (
     <div className="homeUser">
       <Header></Header>
@@ -22,14 +37,19 @@ export default function Chat() {
             <div className="chat__content">
               {chats.length > 0 && chats.map((chat, index) => 
                 <div className="chat__content__item" key={chat.id}>
-                  <span className="name">Nguyen Van A : </span>
-                  <span className="message">Hello</span>
+                  <span className="info">
+                    <div className="avatar">
+                      <img src={chat.users.avatar} alt="" />
+                    </div>
+                    <div className="name">{chat.users.name} : </div>
+                  </span>
+                  <span className="message">{chat.message}</span>
                 </div>
                 )}
             </div>
             <div className="chat__input">
-              <textarea name="" id="" placeholder='Enter your message...'></textarea>
-              <button>Gửi</button>
+              <textarea name="" id="" placeholder='Enter your message...' ref={contentRef}></textarea>
+              <button onClick={handleSendMessage}>Gửi</button>
             </div>
           </div>
         </div>

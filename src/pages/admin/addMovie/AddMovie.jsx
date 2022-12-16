@@ -90,6 +90,7 @@ const AddMovie = () => {
       );
     });
   };
+  
   const handleSelect = (e) => {
     setMovie({ ...movie, [e.target.name]: Number(e.target.value) });
   };

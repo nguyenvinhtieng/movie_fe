@@ -1,7 +1,7 @@
 export const path = {
     register: '/api/auth/signup',
     login: '/api/auth/signin',
-    getLists: `/api/admin/series/`,
+    getLists: `/api/seri`,
     createList: `/api/admin/series/`,
     updateList: (id) => `/api/admin/series/${id}`,
     deleteList: (id) => `/api/admin/series/${id}`,
@@ -14,5 +14,8 @@ export const path = {
     deleteCategory: (id) => `/api/admin/categories/${id}`,
     updateCategory: (id) => `/api/admin/categories/${id}`,
     addReview: `/api/review`,
-    
+    deleteReview: (id) => `/api/review/${id}`,
+    updateInfoUser: `/api/user`,
+    getPlan: `/api/plan`,
+    getChat: `/api/chat`,
 }
