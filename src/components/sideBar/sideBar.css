@@ -26,10 +26,11 @@
 
 .side-bar__list--item {
     padding: 5px;
+    margin-bottom: 4px;
     cursor: pointer;
     display: flex;
     align-items: center;
-    border-radius: 10px;
+    border-radius: 4px;
 }
 
 .side-bar__list--item.active, .side-bar__list--item:hover {

@@ -1672,6 +1672,7 @@ a {
       }
     }
     &__item {
+      background-color: var(--eerie-black);
       span {
         padding: 6px 12px;
         white-space: nowrap;
@@ -2423,4 +2424,14 @@ a {
       color: yellow;
     }
   }
+}
+
+.vip {
+  font-size: 11px;
+  padding: 3px 12px;
+  color: #333;
+  font-weight: bold;
+  border-radius: 4px;
+  background-color: rgb(255, 255, 0);
+  display: inline-block;
 }

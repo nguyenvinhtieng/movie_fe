@@ -99,6 +99,7 @@ export default function Header() {
       setNewPassword("")
       setConfirmPassword("")
       toast.success("Your password has been changed!")
+      handleLogout()
     }catch(err) {
       toast.error(err.message)
       // console.log()
@@ -108,8 +109,9 @@ export default function Header() {
     dispatch(authSlice.actions.logout())
     navigate("/login")
   }
-  useOnClickOutside(menuRef, () => setShowMenu(false));
 
+  useOnClickOutside(menuRef, () => setShowMenu(false));
+  
   return (
     <>
       <CustomModal title="Change my information" isOpen={isOpen} setIsOpen={setIsOpen} handleSubmit={()=>handleUpdateInfo()}>
@@ -149,10 +151,12 @@ export default function Header() {
             <li><NavLink to="/chat" className={({isActive}) => isActive ? "navbarLink active" : "navbarLink"}>Chat</NavLink></li>
             <li><NavLink to="/buy-vip" className={({isActive}) => isActive ? "navbarLink active" : "navbarLink"}>Buy VIP</NavLink></li>
             {/* {auth.user.} */}
-            {auth.user.roles.includes("ROLE_ADMIN") && <li><NavLink to="/admin/users" className="navbarLink">Admin Page</NavLink></li>}
+            {auth.user.roles.includes("ROLE_ADMIN") && <li><NavLink to="/admin" className="navbarLink">Admin Page</NavLink></li>}
           </ul>
           <div className="NavBarRight">
-            <span className="NavBarName">Hello <b> {auth.user?.name || "Anonymous"} </b></span>
+            <span className="NavBarName">
+              Hello <b> {auth.user?.name || "Anonymous"} </b> {auth?.user?.vip && <span className="vip">VIP</span>}
+            </span>
             <span className="NavBarMenu" ref={menuRef}>
               <span className="ico" onClick={()=>setShowMenu(prev => !prev)}>
               <RxDropdownMenu></RxDropdownMenu>
