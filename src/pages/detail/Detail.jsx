@@ -14,6 +14,8 @@ import axios from "axios";
 import request from "../../services/request";
 import { path } from "../../API/apiPath";
 import CustomModal from "../../components/CustomModal/CustomModal";
+import moment from "moment/moment";
+import { toast } from "react-toastify";
 
 export default function Detail() {
   const {movie, auth} = useSelector((state) => state);
@@ -42,6 +44,7 @@ export default function Detail() {
     setCurentMovie(newMovie);
     reviewContentRef.current.value = "";
     setRating(0);
+    toast.success("Review added successfully");
   }
   const showConfirmDelete = async (reviewId) => {
     setIsOpen(true);
@@ -53,13 +56,14 @@ export default function Detail() {
     let newMovie = {...curentMovie};
     newMovie.reviews = newMovie.reviews.filter(item => item.id !== reviewIdRef.current);
     setCurentMovie(newMovie);
+    toast.success("Review deleted successfully");
   }
 
   return (
     <div className="homeUser">
       <Header></Header>
-      <CustomModal title="delete review" button="Delete" danger={true} isOpen={isOpen} setIsOpen={setIsOpen} handleSubmit={deleteReview}>
-        Are you sure?
+      <CustomModal title="Delete review" button="Delete" danger={true} isOpen={isOpen} setIsOpen={setIsOpen} handleSubmit={deleteReview}>
+        Are you sure want to delete this reiew?
       </CustomModal>
       <main>
         <article>
@@ -152,17 +156,24 @@ export default function Detail() {
           </section>
           <section className="review containerUser">
             <h3>REVIEWS</h3>
-
             <div className="review__form">
               {/* <div className="review__form--avatar"> */}
               <h4>Add your reviews</h4>
               <div className="review__form--main">
                   <textarea name="" id="" cols="30" rows="10" placeholder="Enter your reviews...." ref={reviewContentRef}></textarea>
-                  <Rating emptySymbol={<AiOutlineStar />} onChange={(val)=>setRating(val)} fullSymbol={<AiFillStar />}></Rating>
-                  <button onClick={saveReview}>Save</button>
+                  <div className="rating">
+                  <span className="txt">Rating: </span>
+                  <Rating emptySymbol={<AiFillStar className="star " />} onChange={(val)=>setRating(val)} fullSymbol={<AiFillStar className="star fill" />}></Rating>
+
+                  </div>
+                  
+                  <button onClick={saveReview}>Save My Review</button>
               </div>
             </div>
             <div className="review__list">
+              {curentMovie?.reviews?.length === 0 && <div className="empty">
+                  Do not have any reviews yet
+                </div>}
               {curentMovie?.reviews?.length > 0 && 
               curentMovie?.reviews?.map((review, index) => 
                 <div key={review.id} className="review__item">
@@ -170,12 +181,15 @@ export default function Detail() {
                     <div className="review__item--avatar">
                       <img src={review.users.avatar} alt="" />
                     </div>
-                    <div className="review__item--name">{review.users.name}</div>
+                    <div className="review__item--inf">
+                    <div className="review__item--name">{review.users.name} <span className="review__item--star">{review.rating}/5⭐</span></div>
+                    <div className="review__item--date">{moment(review.createdAt).format("LL")}</div>
+                    </div>
                   </div>
                   <div className="review__item--content">
                     <p>{review.content}</p>
-                    <div className="review__item--star">{review.rating}/5⭐</div>
                   </div>
+                  
                   {review?.users?.id == auth?.user?.id && <button className="btnDel" onClick={()=>showConfirmDelete(review.id)}>Xóa</button>}
                 </div>
               )}

@@ -7,6 +7,7 @@ import { path } from '../../API/apiPath';
 import CustomModal from '../../components/CustomModal/CustomModal';
 import Header from '../../components/Header/Header'
 import request from '../../services/request';
+import moment from 'moment/moment';
 const socket = socketIO.connect('http://localhost:1701');
 
 
@@ -66,9 +67,11 @@ export default function BuyVip() {
   }
 
   return (
+    <>
+    <Header></Header>
     <div className="homeUser">
-      <Header></Header>
       <div className="containerUser">
+        {/* <h3>Plan list</h3> */}
         <div className="payment__list">
           {plan?.plans?.length > 0 && plan.plans.map((item, index) => 
           <div className="payment__item" key={item.id} onClick={()=>showBuyVipPayment(item.id)}>
@@ -111,14 +114,19 @@ export default function BuyVip() {
         <div className="payment__history">
           <h1>Payment history</h1>
           <table>
-            <tr>
-              <th>ID</th>
-              <th>Amount</th>
-              <th>Payment</th>
-              <th>Plan</th>
-              <th>Description</th>
-              <th>Status</th>
-            </tr>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Amount</th>
+                <th>Payment</th>
+                <th>Plan</th>
+                <th>Description</th>
+                <th>Date</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+
             {historyPayment?.length > 0 && historyPayment.map((item, index) =>
               <tr key={item.id}>
                 <td>{item.id}</td>
@@ -126,13 +134,19 @@ export default function BuyVip() {
                 <td>{item.payment}</td>
                 <td>{item.plan.name}</td>
                 <td>{item.description}</td>
-                <td>{item.confirmed ? "Confirm" : "Not Confirm"}</td>
+                <td>{moment(item.createdAt).format("LLL")}</td>
+                <td>
+                  <span className={`status ${item.confirmed ? "blue" : "red"}`}>
+                    {item.confirmed ? "Confirm" : "Wait to confirm"}
+                  </span>
+                </td>
               </tr>
             )}
-            
+            </tbody>
           </table>
         </div>
       </div>
     </div>
+    </>
   )
 }

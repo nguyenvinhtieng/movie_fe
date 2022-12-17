@@ -1,14 +1,16 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import CustomModal from "../CustomModal/CustomModal";
+import { RxDropdownMenu } from "react-icons/rx"
 import { toast } from "react-toastify";
 import storage from "../../utils/firebase.util";
-
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import request from "../../services/request";
 import { path } from "../../API/apiPath";
 import authSlice from "../../store/slice/authSlice";
+import useOnClickOutside from "../../hooks/useOnClickOutside";
+
 export default function Header() {
   const auth = useSelector(state => state.auth)
   const dispatch = useDispatch()
@@ -17,7 +19,8 @@ export default function Header() {
   const [name, setName] = React.useState("")
   const [email, setEmail] = React.useState("")
   const [avatar, setAvatar] = React.useState(null)
-
+  const [showMenu, setShowMenu] = React.useState(false)
+  const menuRef = React.useRef()
   const upload = () => {
     console.log(avatar)
     const fileName = new Date().getTime() + avatar[0].name;
@@ -79,9 +82,10 @@ export default function Header() {
   const handleLogout = () => {
     dispatch(authSlice.actions.logout())
   }
+  useOnClickOutside(menuRef, () => setShowMenu(false));
   return (
-    <header className="headerUser" data-header>
-      <CustomModal title="Change my information" isOpen={isOpen} setIsOpen={setIsOpen} handleSubmit={handleUpdateInfo}>
+    <>
+      <CustomModal title="Change my information" isOpen={isOpen} setIsOpen={setIsOpen} handleSubmit={()=>handleUpdateInfo()}>
         <div className="form-group">
           <label htmlFor="name">Name</label>
           <input type="text" name="name" placeholder="Enter your name" value={name} onChange={(e)=>setName(e.target.value)}/>
@@ -96,23 +100,41 @@ export default function Header() {
         </div>
       </CustomModal>
       <CustomModal title="Reset password" isOpen={showConfirmReset} setIsOpen={setShowConfirmReset} handleSubmit={resetPass} danger={true} button="Reset">
-        Reset password
+        Are you sure want to reset password?
       </CustomModal>
-      <nav className="navbarUser" data-navbar>
-        <ul className="navbar-list">
-          <li><Link to="/" className="navbar-link">Home</Link></li>
-          <li><Link to="/movies" className="navbar-link">Movies</Link></li>
-          <li><Link to="/series" className="navbar-link">Series</Link></li>
-          <li><Link to="/chat" className="navbar-link">Chat</Link></li>
-          <li><Link to="/buy-vip" className="navbar-link">Buy VIP</Link></li>
-        </ul>
-        <ul className="navbar-list">
-          <li><span className="name">Hello {auth.user?.name || "Anonymous"}</span></li>
-          <li><span className="changeinfo" onClick={() => setIsOpen(true)}>Change info</span></li>
-          <li><span className="changeinfo" onClick={() => setShowConfirmReset(true)}>Reset password</span></li>
-          <li><button onClick={handleLogout} className="navbar-link">Logout</button></li>
-        </ul>
-      </nav>
-    </header>
+      <header className="headerUser">
+        <nav className="navbarUser">
+          <ul className="NavList">
+            <li><NavLink to="/" className={({isActive}) => isActive ? "navbarLink active" : "navbarLink"}>Home</NavLink></li>
+            <li><NavLink to="/movies" className={({isActive}) => isActive ? "navbarLink active" : "navbarLink"}>Movies</NavLink></li>
+            <li><NavLink to="/series" className={({isActive}) => isActive ? "navbarLink active" : "navbarLink"}>Series</NavLink></li>
+            <li><NavLink to="/chat" className={({isActive}) => isActive ? "navbarLink active" : "navbarLink"}>Chat</NavLink></li>
+            <li><NavLink to="/buy-vip" className={({isActive}) => isActive ? "navbarLink active" : "navbarLink"}>Buy VIP</NavLink></li>
+          </ul>
+          <div className="NavBarRight">
+            <span className="NavBarName">Hello <b> {auth.user?.name || "Anonymous"} </b></span>
+            <span className="NavBarMenu" ref={menuRef}>
+              <span className="ico" onClick={()=>setShowMenu(prev => !prev)}>
+              <RxDropdownMenu></RxDropdownMenu>
+              </span>
+              <div className={`NavBarMenu__wrapper ${showMenu ? "active" : ""}`}>
+                <div className="NavBarMenu__item">
+                  <span onClick={() => setIsOpen(true)}>Change info</span>
+                </div>
+                <div className="NavBarMenu__item">
+                  <span onClick={() => setShowConfirmReset(true)}>Reset password</span>
+                </div>
+                <div className="NavBarMenu__item">
+                  <span onClick={()=> handleLogout()}>Logout</span>
+                </div>
+              </div>
+            </span>
+            {/* <li><span className="changeinfo" onClick={() => setIsOpen(true)}>Change info</span></li>
+            <li><span className="changeinfo" onClick={() => setShowConfirmReset(true)}>Reset password</span></li>
+            <li><button onClick={handleLogout} className="navbarLink">Logout</button></li> */}
+          </div>
+        </nav>
+      </header>
+    </>
   );
 }

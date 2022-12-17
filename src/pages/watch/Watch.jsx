@@ -12,26 +12,29 @@ import { toast } from "react-toastify";
 
 export default function Watch() {
   const {movie, auth} = useSelector((state) => state);
-  const [curentMovie, setCurentMovie] = useState({});
+  const [curentMovie, setCurentMovie] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
   let movieId = location.pathname.split("/")[2];
+  console.log("curentMovie: ", curentMovie)
   useEffect(()=> {
     if(movie.movies.length > 0) {
-      let currentMovie = movie.movies.find(item => item.id == movieId);
-      setCurentMovie(curentMovie);
-      if(currentMovie.vip && auth.user && !auth.user.vip) {
+      console.log("run here")
+      let currentMovieFind = movie.movies.find(item => item.id == movieId);
+      setCurentMovie(currentMovieFind);
+      // console.log(currentMovie)
+      if(currentMovieFind.vip && auth.user && !auth.user.vip) {
         toast.error("You need to be VIP to watch this movie");
         navigate("/movies");
       }
     }
-  }, [movie.movies])
-
+  }, [movie, movieId])
   return (
-    
-    <div className="homeUser">
+    <>
+    <div className="bodyUser">
+
       <Header></Header>
-      <main className='containerUser mt100'>
+      <main className='containerUser'>
         <article>
           <section className="movie-watch">
             <div className="title">You watching movie: {curentMovie?.title}</div>
@@ -44,5 +47,6 @@ export default function Watch() {
         </article>
       </main>
     </div>
+    </>
   );
 }

@@ -3,39 +3,33 @@ import { Link } from "react-router-dom";
 
 export default function MovieList({movies}) {
   return (
-    <section className="top-rated">
-      <div className="containerMovieList">
-        <ul className="movies-list">
+    <section className="MovieListContainer">
+      <div className="MovieListWrapper">
+        <ul className="moviesList">
           {movies.length === 0 && <h1 className="empty">Không có phim nào</h1>}
           {movies.length > 0 && movies.map((movie, _) => (
-            <li key={movie.id}>
-              <div className="movie-card">
-                <Link to={`/detail/${movie.id}`}>
-                  <figure className="card-banner">
+            <li key={movie.id} className="moviesItem">
+              {movie.vip && (<div className="moviesItem__vip"><span>VIP</span></div>)}
+              <div>
+                <Link to={`/detail/${movie.id}`} className="moviesItem__banner">
+                  <figure>
                     <img src={movie.imgTitle} onError={(e) => e.target.src = "/images/movie-1.png"} alt="" />
                   </figure>
                 </Link>
-
-                <div className="title-wrapper">
+                <div className="moviesItem__title">
                   <Link to={`/detail/${movie.id}`}>
-                    <h3 className="card-title">{movie.title}</h3>
+                    <h3>{movie.title}</h3>
                   </Link>
-                  <time dateTime="2022">{movie.year}</time>
+                  <time dateTime={movie.year}>{movie.year}</time>
                 </div>
-
-                <div className="card-meta">
-                  
-                  {movie.vip && <div className="badge badge-outline">VIP</div>}
-
-                  <div className="duration">
+                <div className="moviesItem__meta">
+                  <div className="age">
                     <ion-icon name="time-outline"></ion-icon>
-
-                    <time dateTime="PT122M">{movie.limitAge} + </time>
+                    <time dateTime="PT122M">more than <strong>{movie.limitAge}</strong> age</time>
                   </div>
-
                   <div className="rating">
                     <ion-icon name="star"></ion-icon>
-                    <data>7.8</data>
+                    <data>4 star</data>
                   </div>
                 </div>
               </div>

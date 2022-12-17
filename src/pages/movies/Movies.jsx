@@ -32,11 +32,13 @@ export default function Movies() {
         <section className="top-rated">
           <div className="containerMovieList">
             <p className="section-subtitle">Movies</p>
-            <h2 className="h2 section-title">Top movies</h2>
             <ul className="filter-list">
               {category?.categories?.length > 0 && category.categories.map((category) => 
                 <li><button className="filter-btn" onClick={()=>chooseCategory(category.id)}>{category.name}</button></li>
               )}
+              <li>
+                <button className="filter-btn" onClick={()=>setMovies(movie?.movies)}>All</button>
+              </li>
             </ul>
             <MovieList movies={movies}></MovieList>
           </div>

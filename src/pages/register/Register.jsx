@@ -9,11 +9,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
 export default function Register() {
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
-
   const emailRef = useRef();
   const usernameRef = useRef();
   const nameRef = useRef();
@@ -32,62 +27,48 @@ export default function Register() {
     }
   }, [error, registerSuccess])
 
-  const handleStart = () => {
-    setEmail(emailRef.current.value);
-  };
-
   const handleFinish = async (e) => {
     e.preventDefault();
-    setUsername(usernameRef.current.value);
-    setName(nameRef.current.value);
-    setPassword(passwordRef.current.value);
-
-   await registerApi({ 
-      username: usernameRef.current.value,
-      password: passwordRef.current.value,
-      email, 
-      name: nameRef.current.value 
-    }, dispatch);
-     
+    await registerApi({ 
+        username: usernameRef.current.value,
+        password: passwordRef.current.value,
+        email: emailRef.current.value, 
+        name: nameRef.current.value 
+      }, dispatch);
   };
   return (
-    <div className="register">
-      <div className="top">
-        <div className="wrapper">
-          <img
-            className="logo"
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/2560px-Netflix_2015_logo.svg.png"
-            alt=""
-          />
-          <button className="login-button">
-            <Link to="/login">Sign In</Link>
-          </button>
+    <>
+      
+      <div className="loginPage">
+      <div className="loginPage__wrapper">
+        <div className="loginPage__bg">
+          <img src="/images/bg_login.jpg" alt="" />
         </div>
-      </div>
-      <div className="container">
-        <h1>Unlimited movies, TV shows, and more.</h1>
-        <h2>Watch anywhere. Cancel anytime.</h2>
-        <p>
-          Ready to watch? Enter your email to create or restart your membership.
-        </p>
-        {!email ? (
-          <div className="input">
-            <input type="email" placeholder="email address" ref={emailRef} />
-            <button className="registerButton" onClick={handleStart}>
-              Get Started
-            </button>
-          </div>
-        ) : (
-          <form className="input">
+        <div className="loginPage__container">
+          <form onSubmit={handleFinish}>
+            <h1>Sign Up</h1>
+            <input type="text" placeholder="Your email" ref={emailRef} />
             <input type="text" placeholder="Your username" ref={usernameRef} />
             <input type="text" placeholder="Your name" ref={nameRef} />
-            <input type="password" placeholder="password" ref={passwordRef} />
-            <button className="registerButton" onClick={handleFinish}>
-              Start
+            <input type="password" placeholder="Password" ref={passwordRef} />
+            <button type="submit" className="loginButton">
+              Sign Up
             </button>
+            <span>
+              Have Netflix account?{" "}
+              <b>
+                {" "}
+                <Link to="/login">Sign in now.</Link>{" "}
+              </b>
+            </span>
+            <small>
+              This page is protected by Google reCAPTCHA to ensure you're not a
+              bot. <b>Learn more</b>.
+            </small>
           </form>
-        )}
+        </div>
       </div>
     </div>
+    </>
   );
 }

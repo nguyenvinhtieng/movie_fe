@@ -10,9 +10,16 @@ export default function Chat() {
   const [chats, setChats] = useState([])
   const contentRef = useRef()
   const { auth } = useSelector(state => state)
+  const bottomChatRef = useRef()
   const fetchChatData = async () => {
     const res = await request("GET", path.getChat)
     setChats(res)
+    setTimeout(()=>{
+      scrollToBottom();
+    }, 500)
+  }
+  const scrollToBottom = () => {
+    bottomChatRef.current.scrollIntoView({ behavior: "smooth" })
   }
   useEffect(() => {
     fetchChatData()
@@ -29,18 +36,22 @@ export default function Chat() {
           })
           return unique
         })
+        setTimeout(()=>{
+          scrollToBottom();
+        }, 500)
       })
     // }
   }, [socket])
 
-  const handleSendMessage = async () => {
+  const handleSendMessage = async (e) => {
+    e.preventDefault();
     const content = contentRef.current.value
     if(!content) return
     socket.emit('send_message', {message: content, uid: auth?.user?.id})
     contentRef.current.value = ''
     setTimeout(() => {
       fetchChatData()
-    }, 1000)
+    }, 100)
   }
 
 
@@ -62,11 +73,12 @@ export default function Chat() {
                   <span className="message">{chat.message}</span>
                 </div>
                 )}
+                <div style={{ float:"left", clear: "both" }} ref={bottomChatRef}></div>
             </div>
-            <div className="chat__input">
-              <textarea name="" id="" placeholder='Enter your message...' ref={contentRef}></textarea>
+            <form className="chat__input">
+              <input name="" id="" placeholder='Enter your message...' ref={contentRef}></input>
               <button onClick={handleSendMessage}>Gửi</button>
-            </div>
+            </form>
           </div>
         </div>
       </div>
