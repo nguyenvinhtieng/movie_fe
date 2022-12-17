@@ -13,7 +13,7 @@ export const ProtectedUserRoute = ({ children }) => {
 export const ProtectedAdminRoute = ({ children }) => {
   const { isLogin, user } = useSelector((state) => state.auth);
   if (isLogin ) {
-    if (user.name === "Administrator") {
+    if (user.roles.includes("ROLE_ADMIN")) {
       return <>{children}</>;
     }
     else {

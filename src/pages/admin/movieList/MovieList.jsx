@@ -55,12 +55,12 @@ const MovieList = () => {
     {
       field: "year",
       headerName: "Year",
-      width: 120,
+      width: 70,
     },
     {
       field: "limitAge",
       headerName: "Limit",
-      width: 120,
+      width: 70,
     },
     {
       field: "active",
@@ -101,7 +101,7 @@ const MovieList = () => {
     {
       field: "action",
       headerName: "Action",
-      width: 140,
+      width: 210,
       renderCell: (params) => {
         return (
           <div className="product-list__action">
