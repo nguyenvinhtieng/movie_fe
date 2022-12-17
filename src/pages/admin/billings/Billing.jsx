@@ -6,18 +6,13 @@ import { DeleteOutline } from "@mui/icons-material";
 
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  updateBillingAPI,
-  deleteBillingAPI,
-} from "../../../API/billing.api";
+import { updateBillingAPI, deleteBillingAPI } from "../../../API/billing.api";
 import { toast } from "react-toastify";
 import categorySlice from "../../../store/slice/categorySlice";
 // const socket = socketIO.connect('http://localhost:1701');
 
 const Billings = () => {
-  const { billings, error, success } = useSelector(
-    (state) => state.billing
-  );
+  const { billings, error, success } = useSelector((state) => state.billing);
   const dispatch = useDispatch();
 
   const columns = [
@@ -26,13 +21,9 @@ const Billings = () => {
       field: "name",
       headerName: "Tên gói cước",
       width: 280,
-      renderCell:(params) => {
-        return (
-            <div className="user-list__user">
-                  {params.row.plan.name}
-            </div>
-        )
-    }
+      renderCell: (params) => {
+        return <div className="user-list__user">{params.row.plan.name}</div>;
+      },
     },
     {
       field: "amount",
@@ -47,43 +38,41 @@ const Billings = () => {
       editable: true,
     },
     {
-        field: "code",
-        headerName: "CODE",
-        width: 300,
-        editable: true,
+      field: "code",
+      headerName: "CODE",
+      width: 300,
+      editable: true,
+    },
+    {
+      field: "user",
+      headerName: "User",
+      width: 300,
+      renderCell: (params) => {
+        return <div className="user-list__user">{params.row.users.email}</div>;
       },
-      {
-        field: "user",
-        headerName: "User",
-        width: 300,
-        renderCell:(params) => {
-            return (
-                <div className="user-list__user">
-                    
-                      {params.row.users.email}
-                </div>
-            )
-        }
+    },
+    {
+      field: "confirmed",
+      headerName: "User",
+      width: 300,
+      renderCell: (params) => {
+        return <div className="user-list__user">{params.row.confirmed ? "Hoàn thành" : "Chờ xử lý"}</div>;
       },
-      {
-        field: "plan",
-        headerName: "Gói đăng kí",
-        width: 300,
-        renderCell:(params) => {
-            return (
-                <div className="user-list__user">
-                    
-                      {params.row.plan.name}
-                </div>
-            )
-        }
+    },
+    {
+      field: "plan",
+      headerName: "Gói đăng kí",
+      width: 300,
+      renderCell: (params) => {
+        return <div className="user-list__user">{params.row.plan.name}</div>;
       },
-      {
-        field: "createdAt",
-        headerName: "Ngày khởi tạo",
-        width: 300,
-        editable: true,
-      },
+    },
+    {
+      field: "createdAt",
+      headerName: "Ngày khởi tạo",
+      width: 300,
+      editable: true,
+    },
     {
       field: "action",
       headerName: "Action",
@@ -91,12 +80,14 @@ const Billings = () => {
       renderCell: (params) => {
         return (
           <div className="categories-list__action">
-            <button
-              className="categories-list__button--edit"
-              onClick={() => handleConfirm(params.row.id)}
-            >
-              Confirm
-            </button>
+            {params.row.confirmed && (
+              <button
+                className="categories-list__button--edit"
+                onClick={() => handleConfirm(params.row.id)}
+              >
+                Confirm
+              </button>
+            )}
 
             <DeleteOutline
               onClick={() => handleDelete(params.row.id)}
@@ -108,29 +99,26 @@ const Billings = () => {
     },
   ];
 
- 
-
   useEffect(() => {
     if (error) {
       toast.error(error);
     }
     if (success) {
-      toast.success(success)
+      toast.success(success);
     }
-    dispatch(categorySlice.actions.refreshErrorAndSuccess())
+    dispatch(categorySlice.actions.refreshErrorAndSuccess());
   }, [error, success]);
 
   function handleConfirm(id) {
-    updateBillingAPI(id, dispatch)
+    updateBillingAPI(id, dispatch);
     // setTimeout(()=> {
     //   socket.emit("")
     // }, 1000)
   }
 
   const handleDelete = (id) => {
-    deleteBillingAPI(id, dispatch)
+    deleteBillingAPI(id, dispatch);
   };
-  
 
   return (
     <>
