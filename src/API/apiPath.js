@@ -18,6 +18,7 @@ export const path = {
     deleteReview: (id) => `/api/review/${id}`,
     updateInfoUser: `/api/user`,
     getChat: `/api/chat`,
+    deleteChat: "/api/chat",
     createCategory: `/api/admin/categories/`,
     deleteCategory: (id) => `/api/admin/categories/${id}`,
     updateCategory: (id) => `/api/admin/categories/${id}`,
