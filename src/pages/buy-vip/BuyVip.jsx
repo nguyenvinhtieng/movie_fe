@@ -60,6 +60,7 @@ export default function BuyVip() {
   const confirm = ()  =>  {
     setIsShowModalConfirm(false)
     setIsOpen(true)
+    payment()
   }
   const payment = async () => {
     const res = await request("POST", path.billing, {body: {
@@ -92,7 +93,7 @@ export default function BuyVip() {
           Are you sure want to buy this plan? <br />
           Plan: {paymentInfo.name} ( {paymentInfo.price} / {paymentInfo.days} days )
         </CustomModal>
-        <CustomModal size="md" button="Payment" title="Payment" isOpen={isOpen} setIsOpen={setIsOpen} handleSubmit={payment}>
+        <CustomModal size="md" button="Payment" title="Payment" isOpen={isOpen} setIsOpen={setIsOpen} handleSubmit={()=>{setIsOpen(false)}}>
           <div className="payment">
             <div className="payment__wrapper">
                 <div className="payment__inner">
