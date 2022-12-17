@@ -3,7 +3,10 @@ import React from "react";
 export default function Hero() {
   return (
     <section className="hero">
-      <div className="container">
+      <div className="hero__bg">
+        <img src="/images/hero-bg.jpg" alt="" />
+      </div>
+      <div className="container hero__container">
         <div className="hero-content">
           <p className="hero-subtitle">Filmlane</p>
 
