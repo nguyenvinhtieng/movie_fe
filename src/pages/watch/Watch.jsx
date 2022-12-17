@@ -23,7 +23,7 @@ export default function Watch() {
       let currentMovieFind = movie.movies.find(item => item.id == movieId);
       setCurentMovie(currentMovieFind);
       // console.log(currentMovie)
-      if(currentMovieFind.vip && auth.user && !auth.user.vip) {
+      if(currentMovieFind.vip && auth.user && !auth.user.vip && !auth.user.roles.includes("ROLE_ADMIN")) {
         toast.error("You need to be VIP to watch this movie");
         navigate("/movies");
       }
