@@ -22,6 +22,7 @@ export default function BuyVip() {
   const [time, setTime] = useState(10*60); // 10 minutes
   const [isCopy, setIsCopy] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [isShowModalConfirm, setIsShowModalConfirm] = useState(false)
   const [paymentInfo, setPaymentInfo] = useState({})
   useEffect(()=>{
     let timer = setInterval(() => {
@@ -54,6 +55,10 @@ export default function BuyVip() {
   }
   const showBuyVipPayment = (id) => {
     setPaymentInfo(plan.plans.find(item => item.id === id))
+    setIsShowModalConfirm(true)
+  }
+  const confirm = ()  =>  {
+    setIsShowModalConfirm(false)
     setIsOpen(true)
   }
   const payment = async () => {
@@ -83,6 +88,10 @@ export default function BuyVip() {
           </div>
           )}
         </div>
+        <CustomModal title="Confirm buy" isOpen={isShowModalConfirm} setIsOpen={setIsShowModalConfirm} button='Confirm' handleSubmit={confirm}>
+          Are you sure want to buy this plan? <br />
+          Plan: {paymentInfo.name} ( {paymentInfo.price} / {paymentInfo.days} days )
+        </CustomModal>
         <CustomModal size="md" button="Payment" title="Payment" isOpen={isOpen} setIsOpen={setIsOpen} handleSubmit={payment}>
           <div className="payment">
             <div className="payment__wrapper">
