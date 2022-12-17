@@ -52,7 +52,7 @@ const authSlice = createSlice({
         state.loadingRegister = false;
         state.error = action.payload.message
       },
-      logout(state, action){
+      logout(state){
         localStorage.removeItem("token")
         localStorage.removeItem("refresh_token")
         localStorage.removeItem("user")
@@ -61,7 +61,6 @@ const authSlice = createSlice({
         state.accessToken = null;
         state.refreshToken = null;
         state.loadingLogin = false;
-        state.error = action.payload.err
       },
       updateInfo(state, action){
         localStorage.setItem("user", JSON.stringify(action.payload.user));

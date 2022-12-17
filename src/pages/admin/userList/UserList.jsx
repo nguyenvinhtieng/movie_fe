@@ -75,7 +75,7 @@ const UserList = () => {
         {
             field: 'action',
             headerName: 'Action',
-            width: 140,
+            width: 180,
             renderCell: (params) => {
                 return (
                     <div className="user-list__action">

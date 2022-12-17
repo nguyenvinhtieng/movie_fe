@@ -67,7 +67,7 @@ const Product = () => {
   const handleChange = (e) => {
     let value = e.target.value;
 
-    if ([e.target.name] === "active" || [e.target.name] === "vip") {
+    if (e.target.name === "active" || e.target.name === "vip") {
       value = value === "0" ? false : true;
     }
     if ([e.target.name] === "limitAge") {
