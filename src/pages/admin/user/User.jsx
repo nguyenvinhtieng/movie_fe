@@ -1,9 +1,12 @@
-import { LocationSearching, MailOutline, PermIdentity, Publish } from "@mui/icons-material"
+import {  MailOutline, PermIdentity, Publish } from "@mui/icons-material"
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
+import Autocomplete from "@mui/material/Autocomplete";
+import TextField from "@mui/material/TextField";
 
 import "./user.css"
+const ROLES = ['ROLE_USER', 'ROLE_ADMIN']
 
 const User = () => {
     const location = useLocation();
@@ -17,6 +20,23 @@ const User = () => {
         role: user.role, 
         vip: user.vip, 
       });
+      const handleChange = (e) => {
+        let value = e.target.value;
+    
+        if ([e.target.name] === "active" || [e.target.name] === "vip") {
+          value = value === "0" ? false : true;
+        }
+        if ([e.target.name] === "limitAge") {
+          value = Number(value);
+        }
+    
+        console.log("a");
+    
+        setUpdateUser({ ...user, [e.target.name]: value });
+      };
+      const handleAutoCompleteChange = (e, value) => {
+		setUpdateUser({...user, role: value.map(el=>el)})
+	}
     return (
         <div className="user">
             <div className="user__container">
@@ -57,24 +77,38 @@ const User = () => {
                             <div className="user-update--item">
                                 <label htmlFor="">Full name</label>
                                 <input type="text" 
+                                    onChange={handleChange}
                                     placeholder={user.name}
+                                    name="name"
                                     className="user-update--input" 
                                 />
                             </div>
                             <div className="user-update--item">
                                 <label htmlFor="">{user.email}</label>
                                 <input type="text" 
-                                    placeholder="annahart99@gmail.com" 
+                                    onChange={handleChange}
+                                    placeholder={user.email}
+                                    name="email"
                                     className="user-update--input" 
                                 />
                             </div>
                             
-                            <div className="user-update--item">
-                                <label htmlFor="">Address</label>
-                                <input type="text" 
-                                    placeholder="New York | USA" 
-                                    className="user-update--input" 
+                            <div className="addProductItem">
+                                <label>Categories</label>
+                                <Autocomplete
+                                multiple
+                                id="tags-standard"
+                                options={ROLES}
+                                getOptionLabel={(option) => option}
+                                renderInput={(params) => (
+                                <TextField
+                                    {...params}
+                                    variant="standard"
+                                    placeholder="Chọn danh mục"
                                 />
+                                )}
+                                            onChange={handleAutoCompleteChange}
+                            />
                             </div>
                         </div>
                         <div className="user-update__right">

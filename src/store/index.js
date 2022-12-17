@@ -6,6 +6,7 @@ import categorySlice from "./slice/categorySlice";
 import planSlice from "./slice/planSlice";
 import modalSlice from "./slice/modalSlice";
 import userSlice from "./slice/userSlice";
+import billingSlice from "./slice/billingSlice";
 
 const store = configureStore({
     reducer: {
@@ -15,6 +16,7 @@ const store = configureStore({
         category: categorySlice.reducer,
         modal: modalSlice.reducer,
         plan: planSlice.reducer,
+        billing: billingSlice.reducer,
         user: userSlice.reducer
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware()
