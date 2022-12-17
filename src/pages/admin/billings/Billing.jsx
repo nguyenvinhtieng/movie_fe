@@ -80,7 +80,7 @@ const Billings = () => {
       renderCell: (params) => {
         return (
           <div className="categories-list__action">
-            {params.row.confirmed && (
+            {!params.row.confirmed && (
               <button
                 className="categories-list__button--edit"
                 onClick={() => handleConfirm(params.row.id)}
