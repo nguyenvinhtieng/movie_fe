@@ -36,5 +36,7 @@ export const path = {
     getLatestUser: `/api/admin/home/users`,
     getLatestBilling: `/api/admin/home/billing`,
     getTotalBilling: `/api/admin/home/billing-summary`,
+    getTotalMovie: `/api/admin/home/movie-count-all`,
+    getTotalMovieActive: `/api/admin/home/movie-count`,
     getTotalAnalysis: `/api/admin/home/analysis`,
 }
