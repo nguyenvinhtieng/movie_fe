@@ -32,6 +32,9 @@
   margin-right: auto;
   z-index: 2;
   border-radius: 4px;
+  &.md {
+    max-width: 800px;
+  }
 }
 .customModalHead {
   padding: 10px 16px;

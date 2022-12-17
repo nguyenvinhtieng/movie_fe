@@ -97,7 +97,7 @@ export default function Detail() {
                     <div>
                       <ion-icon name="calendar-outline"></ion-icon>
 
-                      <time datetime="2021">{curentMovie.year}</time>
+                      <time dateTime="2021">{curentMovie.year}</time>
                     </div>
 
                     <div>

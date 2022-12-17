@@ -3,11 +3,11 @@ import {FaTimes } from "react-icons/fa"
 import "./custommodal.scss"
 
 
-export default function CustomModal({title, children, isOpen, setIsOpen, handleSubmit, button = "Save", danger = false}) {
+export default function CustomModal({title, children, isOpen, setIsOpen, handleSubmit, button = "Save", danger = false, size = ""}) {
   return (
-    <div className={`customModal ${isOpen ? "active" : ""}`}>
+    <div className={`customModal ${isOpen ? "active" : ""} `}>
       <div className="customModalOverlay" onClick={() => setIsOpen(false)}></div>
-      <div className="customModalContainer">
+      <div className={`customModalContainer ${size}`}>
         <div className="customModalHead">
           <p>{title}</p>
           <div className="close" onClick={() => setIsOpen(false)}><FaTimes></FaTimes></div>

@@ -28,13 +28,13 @@ export default function Hero() {
               <div>
                 <ion-icon name="calendar-outline"></ion-icon>
 
-                <time datetime="2022">2022</time>
+                <time datetTime="2022">2022</time>
               </div>
 
               <div>
                 <ion-icon name="time-outline"></ion-icon>
 
-                <time datetime="PT128M">128 min</time>
+                <time datetTime="PT128M">128 min</time>
               </div>
             </div>
           </div>

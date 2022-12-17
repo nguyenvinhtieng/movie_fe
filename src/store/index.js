@@ -5,6 +5,7 @@ import movieSlice from "./slice/movieSlice";
 import categorySlice from "./slice/categorySlice";
 import planSlice from "./slice/planSlice";
 import modalSlice from "./slice/modalSlice";
+import userSlice from "./slice/userSlice";
 
 const store = configureStore({
     reducer: {
@@ -13,7 +14,8 @@ const store = configureStore({
         list: listSlice.reducer,
         category: categorySlice.reducer,
         modal: modalSlice.reducer,
-        plan: planSlice.reducer
+        plan: planSlice.reducer,
+        user: userSlice.reducer
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware()
 })

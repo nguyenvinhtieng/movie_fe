@@ -1,9 +1,8 @@
 /* eslint-disable no-unused-vars */
 import { createBrowserRouter } from "react-router-dom";
 
-// import AddUser from "../pages/admin/addUser/AddUser";
 import UserList from "../pages/admin/userList/UserList";
-// import User from "../pages/admin/user/User";
+import User from "../pages/admin/user/User";
 
 import Movie from "../pages/admin/movie/Movie";
 import MovieList from "../pages/admin/movieList/MovieList";
@@ -31,6 +30,7 @@ import BuyVip from "../pages/buy-vip/BuyVip";
 import Chat from "../pages/chat/Chat";
 import SeriesUser from "../pages/series/Series";
 import Payment from "../pages/payment/Payment";
+import ResetPass from "../pages/reset-password/ResetPass";
 
 const router = createBrowserRouter([
   {
@@ -74,14 +74,10 @@ const router = createBrowserRouter([
         path: "users",
         element: <UserList />
       },
-      // {
-      //   path: "add-user",
-      //   element: <AddUser />,
-      // },
-      // {
-      //   path: "user/:userId",
-      //   element: <User />
-      // },
+      {
+        path: "users/:userId",
+        element: <User />
+      },
       {
         path: "movies",
         element: <MovieList />
@@ -182,6 +178,15 @@ const router = createBrowserRouter([
     element: (
       // <ProtectedUserRoute>
         <SeriesUser />
+      // </ProtectedUserRoute>
+    ),
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/reset-password/*",
+    element: (
+      // <ProtectedUserRoute>
+        <ResetPass />
       // </ProtectedUserRoute>
     ),
     errorElement: <ErrorPage />,

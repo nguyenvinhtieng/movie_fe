@@ -15,6 +15,7 @@ import {
   updateCategoryAPI,
 } from "../../../API/categories.api";
 import { toast } from "react-toastify";
+import categorySlice from "../../../store/slice/categorySlice";
 
 const style = {
   position: "absolute",
@@ -95,7 +96,11 @@ const Categories = () => {
     if (error) {
       toast.error(error);
     }
-  }, [error]);
+    if (success) {
+      toast.success(success)
+    }
+    dispatch(categorySlice.actions.refreshErrorAndSuccess())
+  }, [error, success]);
 
   function handleClick() {
     console.log(value)

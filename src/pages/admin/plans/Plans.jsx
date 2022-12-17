@@ -15,6 +15,7 @@ import {
   updatePlanAPI,
 } from "../../../API/plans.api";
 import { toast } from "react-toastify";
+import planSlice from "../../../store/slice/planSlice";
 
 const style = {
   position: "absolute",
@@ -31,10 +32,11 @@ const style = {
   p: 4,
 };
 
-const Categories = () => {
-  const { categories, error, isFetching, success } = useSelector(
-    (state) => state.category
+const Plans = () => {
+  const { plans, error, isFetching, success } = useSelector(
+    (state) => state.plan
   );
+
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [edit, setEdit] = useState(false);
@@ -44,18 +46,24 @@ const Categories = () => {
     { field: "id", headerName: "ID", width: 90 },
     {
       field: "name",
-      headerName: "Tên danh mục",
+      headerName: "Tên gói cước",
       width: 280,
     },
     {
-      field: "updatedAt",
-      headerName: "Ngày cập nhật gần nhất",
+      field: "description",
+      headerName: "Mô tả",
       width: 300,
       editable: true,
     },
     {
-      field: "createdAt",
-      headerName: "Ngày khởi tạo",
+      field: "price",
+      headerName: "Giá cước",
+      width: 300,
+      editable: true,
+    },
+    {
+      field: "days",
+      headerName: "Thơi lượng gói cước",
       width: 300,
       editable: true,
     },
@@ -95,40 +103,51 @@ const Categories = () => {
     if (error) {
       toast.error(error);
     }
-  }, [error]);
+    if (success) {
+      toast.success(success);
+    }
+    dispatch(planSlice.actions.refreshErrorAndSuccess());
+  }, [error, success]);
 
   function handleClick() {
-    console.log(value)
     if (edit) {
-      updatePlanAPI(value.id ,{ name: value.name }, dispatch);
+      updatePlanAPI(value.id, value, dispatch);
     } else {
-      createPlanAPI({ name: value.name }, dispatch);
+      createPlanAPI(value, dispatch);
     }
 
-    setOpen(false)
+    setOpen(false);
   }
 
   const handleDelete = (id) => {
-    deletePlanAPI(id, dispatch)
+    deletePlanAPI(id, dispatch);
   };
-  
 
   const handleEdit = (id) => {
-    const editValue = categories.find((el) => el.id === id);
-    
+    const editValue = plans.find((el) => el.id === id);
+
     setEdit(true);
     setValue(editValue);
     setOpen(true);
+  };
+  const handleChange = (e) => {
+    setValue({
+      ...value,
+      [e.target.name]:
+        (e.target.name === "days" || e.target.name === "price")
+          ? Number(e.target.value)
+          : e.target.value,
+    });
   };
 
   return (
     <>
       <div className="categories-list">
         <button className="categories-add--button" onClick={handleOpen}>
-          Thêm danh mục
+          Thêm gói cước
         </button>
         <DataGrid
-          rows={categories}
+          rows={plans}
           columns={columns}
           pageSize={9}
           checkboxSelection
@@ -148,15 +167,45 @@ const Categories = () => {
             component="h2"
             sx={{ marginBottom: 2 }}
           >
-            {edit ? "Thêm danh mục" : "Sửa danh mục"}
+            {!edit ? "Thêm gói cước" : "Sửa gói cước"}
           </Typography>
           <TextField
             required
             id="outlined-required"
-            label="Tên danh mục"
+            label="Tên gói cước"
+            name="name"
             defaultValue={value?.name}
             sx={{ width: "100%", marginBottom: 2 }}
-            onChange={(e) => {edit ? setValue({id: value.id, name: e.target.value }): setValue({name: e.target.value })}}
+            onChange={handleChange}
+          />
+          <TextField
+            required
+            id="outlined-required"
+            label="Mô tả"
+            name="description"
+            defaultValue={value?.description}
+            sx={{ width: "100%", marginBottom: 2 }}
+            onChange={handleChange}
+          />
+          <TextField
+            required
+            id="outlined-required"
+            label="Giá"
+            name="price"
+            type="number"
+            defaultValue={value?.price}
+            sx={{ width: "100%", marginBottom: 2 }}
+            onChange={handleChange}
+          />
+          <TextField
+            required
+            id="outlined-required"
+            label="Thời gian"
+            name="days"
+            type="number"
+            defaultValue={value?.days}
+            sx={{ width: "100%", marginBottom: 2 }}
+            onChange={handleChange}
           />
           <LoadingButton
             size="small"
@@ -173,4 +222,4 @@ const Categories = () => {
   );
 };
 
-export default Categories;
+export default Plans;

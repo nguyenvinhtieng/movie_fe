@@ -13,6 +13,7 @@ export default function Header() {
   const auth = useSelector(state => state.auth)
   const dispatch = useDispatch()
   const [isOpen, setIsOpen] = React.useState(false)
+  const [showConfirmReset, setShowConfirmReset] = React.useState(false)
   const [name, setName] = React.useState("")
   const [email, setEmail] = React.useState("")
   const [avatar, setAvatar] = React.useState(null)
@@ -66,7 +67,15 @@ export default function Header() {
     }
     upload()
   }
-
+  const resetPass = async () => {
+    const res = await request("POST", path.resetPass, {body: {
+      email: auth.user.email,
+      username: auth.user.username,
+      path: window.location.origin + "/reset-password"
+    }});
+    setShowConfirmReset(false)
+    toast.success("Please check your email to reset password")
+  }
   const handleLogout = () => {
     dispatch(authSlice.actions.logout())
   }
@@ -86,6 +95,9 @@ export default function Header() {
           <input type="file" name="file" onChange={(e) => setAvatar(e.target.files) }/>
         </div>
       </CustomModal>
+      <CustomModal title="Reset password" isOpen={showConfirmReset} setIsOpen={setShowConfirmReset} handleSubmit={resetPass} danger={true} button="Reset">
+        Reset password
+      </CustomModal>
       <nav className="navbarUser" data-navbar>
         <ul className="navbar-list">
           <li><Link to="/" className="navbar-link">Home</Link></li>
@@ -96,8 +108,9 @@ export default function Header() {
         </ul>
         <ul className="navbar-list">
           <li><span className="name">Hello {auth.user?.name || "Anonymous"}</span></li>
-          <li><span className="name" onClick={() => setIsOpen(true)}>Change info</span></li>
-          <li><button className="navbar-link" onClick={handleLogout}>Logout</button></li>
+          <li><span className="changeinfo" onClick={() => setIsOpen(true)}>Change info</span></li>
+          <li><span className="changeinfo" onClick={() => setShowConfirmReset(true)}>Reset password</span></li>
+          <li><button onClick={handleLogout} className="navbar-link">Logout</button></li>
         </ul>
       </nav>
     </header>
