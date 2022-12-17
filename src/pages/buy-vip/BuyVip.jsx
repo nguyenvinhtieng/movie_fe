@@ -69,7 +69,7 @@ export default function BuyVip() {
       planId: paymentInfo.id,
       description: paymentInfo.description
     }});
-    setIsOpen(false)
+    // setIsOpen(false)
     toast.success("Please wait for the admin to confirm your payment")
     fetchHisotryPayment()
   }
