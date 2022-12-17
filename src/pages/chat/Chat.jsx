@@ -54,6 +54,8 @@ export default function Chat() {
     }, 100)
   }
 
+  console.log("chats: ", chats)
+
 
   return (
     <div className="homeUser">
@@ -63,7 +65,7 @@ export default function Chat() {
           <div className="chat__wrapper">
             <div className="chat__content">
               {chats.length > 0 && chats.map((chat, _) => 
-                <div className="chat__content__item" key={chat.id}>
+                <div className={`chat__content__item ${chat.users.id == auth.user.id ? "me" : ""}`} key={chat.id}>
                   <span className="info">
                     <div className="avatar">
                       <img src={chat.users.avatar} alt="" />

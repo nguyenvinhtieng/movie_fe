@@ -1,5 +1,6 @@
 export const path = {
     register: '/api/auth/signup',
+    changePassword: '/api/auth/change-password',
     login: '/api/auth/signin',
     resetPass: "/api/auth/reset-password",
     verifyPath: "/api/auth/reset-verify",
