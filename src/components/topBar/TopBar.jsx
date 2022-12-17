@@ -8,7 +8,7 @@ const TopBar = () => {
             <div className="top-bar-wrapper">
                 <div className="top-left">
                     <Link to="/">
-                        <span className="logo">Netflix ADMIN</span>
+                        <span className="logo">Movie App Admin</span>
                     </Link>
                 </div>
                 <div className="top-right">

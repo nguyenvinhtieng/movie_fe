@@ -1,5 +1,5 @@
-import { AttachMoney, BarChart, ChatBubbleOutline, DynamicFeed, LineStyle, MailOutline, PermIdentity, Report, Storefront, Timeline, TrendingUp, WorkOutline } from "@mui/icons-material"
-import { Link, useNavigate } from "react-router-dom"
+import { LineStyle, PermIdentity, Storefront} from "@mui/icons-material"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import "./sideBar.css"
 import { MdOutlineCategory } from "react-icons/md"
 import { FiUsers } from "react-icons/fi"
@@ -15,6 +15,8 @@ const SideBar = () => {
         dispatch(authSlice.actions.logout())
         navigate("/login")
     }
+    const location = useLocation()
+    const active = location.pathname.split("/")[2];
     return (
         <div className="side-bar">
             <div className="side-bar-wrapper">
@@ -22,19 +24,19 @@ const SideBar = () => {
                     <div className="side-bar--titles">Dashboard</div>
                     <div className="side-bar__list">
                         <Link to="/admin/">
-                            <div className="side-bar__list--item active">
+                            <div className={active === "" ? "side-bar__list--item active" : "side-bar__list--item"}>
                                 <LineStyle className="side-bar__icon"/>
                                 Home
                             </div>
                         </Link>
                         <Link to="/admin/movies">
-                            <div className="side-bar__list--item">
+                            <div className={active === "movies" ? "side-bar__list--item active" : "side-bar__list--item"}>
                                 <Storefront className="side-bar__icon"/>
                                 Movies
                             </div>
                         </Link>
                         <Link to="/admin/billings">
-                            <div className="side-bar__list--item">
+                            <div className={active === "billings" ? "side-bar__list--item active" : "side-bar__list--item"}>
                                 <PermIdentity className="side-bar__icon"/>
                                 Billings
                             </div>
@@ -45,7 +47,7 @@ const SideBar = () => {
                     <div className="side-bar--titles">Quick Menu</div>
                     <div className="side-bar__list">
                         <Link to="/admin/users">
-                            <div className="side-bar__list--item">
+                            <div className={active === "users" ? "side-bar__list--item active" : "side-bar__list--item"}>
                                 <FiUsers  className="side-bar__icon"></FiUsers>
                                 {/* <PermIdentity className="side-bar__icon"/> */}
                                 Users
@@ -53,28 +55,36 @@ const SideBar = () => {
                         </Link>
                         
                         <Link to="/admin/categories">
-                            <div className="side-bar__list--item">
+                            <div className={active === "categories" ? "side-bar__list--item active" : "side-bar__list--item"}>
                             <MdOutlineCategory  className="side-bar__icon"></MdOutlineCategory>
                                 {/* <PermIdentity className="side-bar__icon"/> */}
                                 Categories
                             </div>
                         </Link>
                         <Link to="/admin/plans">
-                            <div className="side-bar__list--item">
+                            <div className={active === "plans" ? "side-bar__list--item active" : "side-bar__list--item"}>
                                 {/* <PermIdentity className="side-bar__icon"/> */}
                                 <BiPaperPlane  className="side-bar__icon"></BiPaperPlane>
                                 Plans
                             </div>
                         </Link>
                         <Link to="/admin/series">
-                            <div className="side-bar__list--item">
+                            <div className={active === "series" ? "side-bar__list--item active" : "side-bar__list--item"}>
                                 {/* <PermIdentity className="side-bar__icon"/>
                                  */}
                                  <BiServer  className="side-bar__icon"></BiServer>
                                 Series
                             </div>
                         </Link>
-                    
+                        <Link to="/admin/reviews">
+                            <div className={active === "reviews" ? "side-bar__list--item active" : "side-bar__list--item"}>
+                                {/* <PermIdentity className="side-bar__icon"/>
+                                 */}
+                                 <BiServer  className="side-bar__icon"></BiServer>
+                                Reviews
+                            </div>
+                        </Link>
+                
                     </div>
                 </div>
                 <div className="side-bar__menu">

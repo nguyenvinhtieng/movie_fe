@@ -41,4 +41,7 @@ export const path = {
     getTotalMovie: `/api/admin/home/movie-count-all`,
     getTotalMovieActive: `/api/admin/home/movie-count`,
     getTotalAnalysis: `/api/admin/home/analysis`,
+    getAdminReviews: `/api/admin/reviews`,
+    deleteAdminReview: (id) => `/api/admin/reviews/${id}`,
+    updateAdminReview: (id) => `/api/admin/reviews/${id}`,
 }

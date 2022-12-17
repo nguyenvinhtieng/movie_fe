@@ -40,10 +40,10 @@ const AddMovie = () => {
   const handleChange = (e) => {
     let value = e.target.value;
 
-    if ([e.target.name] === "active" || [e.target.name] === "vip") {
+    if (e.target.name === "active" || e.target.name === "vip") {
       value = value === "0" ? false : true
     }
-    if ([e.target.name] === "limitAge") {
+    if (e.target.name === "limitAge") {
       value = Number(value)
     }
 
@@ -217,16 +217,16 @@ const AddMovie = () => {
         </div> */}
         <div className="add-product-item">
           <label>Is VIP?</label>
-          <select name="vip" id="isSeries" onChange={handleChange}>
+          <select name="vip" defaultValue={0} id="isSeries" onChange={handleChange}>
             <option value="0">No</option>
-            <option value="1" selected>Yes</option>
+            <option value="1" >Yes</option>
           </select>
         </div>
         <div className="add-product-item">
           <label>Status?</label>
-          <select name="active" id="isSeries" onChange={handleChange}>
+          <select name="active" defaultValue={1} id="isSeries" onChange={handleChange}>
             <option value="0">Disable</option>
-            <option value="1" selected>Active</option>
+            <option value="1" >Active</option>
           </select>
         </div>
         <div className="add-product-item">

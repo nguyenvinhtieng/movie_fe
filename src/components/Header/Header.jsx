@@ -26,7 +26,6 @@ export default function Header() {
   const navigate = useNavigate()
   const menuRef = React.useRef()
   const upload = () => {
-    console.log(avatar)
     const fileName = new Date().getTime() + avatar[0].name;
     const storageRef = ref(storage, `/avatar/${fileName}`);
     const uploadTask = uploadBytesResumable(storageRef, avatar);

@@ -1,7 +1,6 @@
 import { DataGrid } from "@mui/x-data-grid";
 import "./movieList.css";
 import { Link } from "react-router-dom";
-import { DeleteOutline } from "@mui/icons-material";
 import {  useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import movieSlice from "../../../store/slice/movieSlice";
@@ -13,6 +12,7 @@ const MovieList = () => {
   const { movies, isFetching, error, success} = useSelector(state => state.movie);
   
   const dispatch = useDispatch()
+  console.log(movies)
 
   useEffect(() => {
     if (error) {
@@ -81,7 +81,7 @@ const MovieList = () => {
       renderCell: (params) => {
         return (
           <div className="product-list__product">
-            {params.row.series.title}
+            {params.row.series?.title}
           </div>
         );
       },

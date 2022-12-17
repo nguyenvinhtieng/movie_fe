@@ -33,6 +33,7 @@ import SeriesUser from "../pages/series/Series";
 import Payment from "../pages/payment/Payment";
 import ResetPass from "../pages/reset-password/ResetPass";
 import ForgotPass from "../pages/forgot-pass/ForgotPass";
+import Reviews from "../pages/admin/reviews/Reviews";
 
 const router = createBrowserRouter([
   {
@@ -115,6 +116,10 @@ const router = createBrowserRouter([
       {
         path: "new-series",
         element: <AddSeries />
+      },
+      {
+        path: "reviews",
+        element: <Reviews />
       },
     ],
   },
