@@ -20,7 +20,7 @@ const HomeAdmin = () => {
     return (
         <div className="home-admin">
             <FeatureInfo />
-            <Chart data={analysis} title="Billing Analytics" dataKey="Billing total" grid/>
+            <Chart data={analysis} title="Billing Analytics" dataKey="total" grid/>
             <div className="home-widgets">
                 <WidgetSm />
                 <WidgetLg />

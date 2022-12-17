@@ -1,8 +1,10 @@
 import { Language, NotificationsNone, Settings } from "@mui/icons-material"
 import "./topBar.css"
 import { Link } from "react-router-dom"
+import { useSelector } from "react-redux"
 
 const TopBar = () => {
+    const {user} = useSelector(state => state.auth)
     return (
         <div className="top-bar">
             <div className="top-bar-wrapper">
@@ -24,7 +26,7 @@ const TopBar = () => {
                         <Settings />
                     </div>
                     <img 
-                    src="https://source.unsplash.com/random" 
+                    src={user.avatar}
                     alt="" 
                     className="top__avatar" />
                 </div>

@@ -28,7 +28,7 @@ const WidgetLg = () => {
           <tr key={transactions.id} className="widget-lg__tr">
             <td className="widget-lg--user">
               <img
-                src="https://image-us.eva.vn/upload/1-2020/images/2020-03-20/3-1584713048-659-width800height700.jpg"
+                src={transaction.users.avatar}
                 alt=""
                 className="widget-lg__img"
               />
