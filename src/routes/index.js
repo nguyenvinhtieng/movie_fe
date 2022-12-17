@@ -141,72 +141,72 @@ const router = createBrowserRouter([
   {
     path: "/watch/*",
     element: (
-      // <ProtectedUserRoute>
+      <ProtectedUserRoute>
         <Watch />
-      // </ProtectedUserRoute>
+      </ProtectedUserRoute>
     ),
     errorElement: <ErrorPage />,
   },
   {
     path: "/detail/*",
     element: (
-      // <ProtectedUserRoute>
+      <ProtectedUserRoute>
         <Detail />
-      // </ProtectedUserRoute>
+      </ProtectedUserRoute>
     ),
     errorElement: <ErrorPage />,
   },
   {
     path: "/movies",
     element: (
-      // <ProtectedUserRoute>
+      <ProtectedUserRoute>
         <Movies />
-      // </ProtectedUserRoute>
+      </ProtectedUserRoute>
     ),
     errorElement: <ErrorPage />,
   },
   {
     path: "/buy-vip",
     element: (
-      // <ProtectedUserRoute>
+       <ProtectedUserRoute>
         <BuyVip />
-      // </ProtectedUserRoute>
+       </ProtectedUserRoute>
     ),
     errorElement: <ErrorPage />,
   },
   {
     path: "/payment",
     element: (
-      // <ProtectedUserRoute>
+       <ProtectedUserRoute>
         <Payment />
-      // </ProtectedUserRoute>
+       </ProtectedUserRoute>
     ),
     errorElement: <ErrorPage />,
   },
   {
     path: "/chat",
     element: (
-      // <ProtectedUserRoute>
+       <ProtectedUserRoute>
         <Chat />
-      // </ProtectedUserRoute>
+       </ProtectedUserRoute>
     ),
     errorElement: <ErrorPage />,
   },
   {
     path: "/series",
     element: (
-      // <ProtectedUserRoute>
+       <ProtectedUserRoute>
         <SeriesUser />
-      // </ProtectedUserRoute>
+       </ProtectedUserRoute>
     ),
     errorElement: <ErrorPage />,
   },
   {
     path: "/reset-password/*",
     element: (
-      // <ProtectedUserRoute>
+       <ProtectedUserRoute>
         <ResetPass />
-      // </ProtectedUserRoute>
+       </ProtectedUserRoute>
     ),
     errorElement: <ErrorPage />,
   }

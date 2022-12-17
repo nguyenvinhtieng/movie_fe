@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom"
 
 export default function Hero() {
   return (
@@ -44,8 +45,9 @@ export default function Hero() {
 
           <button className="btn btn-primary">
             <ion-icon name="play"></ion-icon>
-
-            <span>Watch now</span>
+            <Link to="/movies">
+              <span>Watch now</span>
+            </Link>
           </button>
         </div>
       </div>

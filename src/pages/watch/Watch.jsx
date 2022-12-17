@@ -15,15 +15,12 @@ export default function Watch() {
   const [curentMovie, setCurentMovie] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
-  let movieId = location.pathname.split("/")[2];
-  console.log("curentMovie: ", curentMovie)
+  let movieId = Number(location.pathname.split("/")[2]);
   useEffect(()=> {
     if(movie.movies.length > 0) {
-      console.log("run here")
       let currentMovieFind = movie.movies.find(item => item.id === movieId);
       setCurentMovie(currentMovieFind);
-      // console.log(currentMovie)
-      if(currentMovieFind.vip && auth.user && !auth.user.vip && !auth.user.roles.includes("ROLE_ADMIN")) {
+      if(currentMovieFind?.vip && auth?.user && !auth?.user?.vip && !auth?.user?.roles?.includes("ROLE_ADMIN")) {
         toast.error("You need to be VIP to watch this movie");
         navigate("/movies");
       }

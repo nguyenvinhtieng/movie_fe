@@ -2,6 +2,7 @@ export const path = {
     register: '/api/auth/signup',
     changePassword: '/api/auth/change-password',
     login: '/api/auth/signin',
+    getMe: `/api/auth/get-info`,
     resetPass: "/api/auth/reset-password",
     verifyPath: "/api/auth/reset-verify",
     getLists: `/api/seri`,

@@ -58,3 +58,13 @@ export const loginApi = async (user, dispatch) => {
 	}
   
 };
+
+
+export const getMe = async (dispatch) => {
+	try {	
+		const res = await request("GET", path.getMe);
+		dispatch(authSlice.actions.updateInfo(res))
+	}catch (err) {
+		dispatch(authSlice.actions.logout())
+	}
+}

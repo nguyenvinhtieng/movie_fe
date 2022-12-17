@@ -10,6 +10,7 @@ import { getCategoriesAPI } from './API/categories.api'
 import { getListsAPI } from "./API/lists.api";
 // import { getAllPlanAPI } from "./API/plan.api";
 import { getPlansAPI } from "./API/plans.api";
+import { getMe } from "./API/auth.api";
 
 const App = () => {
   const {auth} = useSelector(state => state)

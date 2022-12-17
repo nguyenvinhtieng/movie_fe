@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { IoCopy } from "react-icons/io5";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import socketIO from 'socket.io-client';
 import { toast } from 'react-toastify';
 import { path } from '../../API/apiPath';
@@ -8,6 +8,7 @@ import CustomModal from '../../components/CustomModal/CustomModal';
 import Header from '../../components/Header/Header'
 import request from '../../services/request';
 import moment from 'moment/moment';
+import { getMe } from '../../API/auth.api';
 const socket = socketIO.connect('http://localhost:1701');
 
 
@@ -24,6 +25,7 @@ export default function BuyVip() {
   const [isOpen, setIsOpen] = useState(false);
   const [isShowModalConfirm, setIsShowModalConfirm] = useState(false)
   const [paymentInfo, setPaymentInfo] = useState({})
+  const dispatch = useDispatch()
   useEffect(()=>{
     let timer = setInterval(() => {
       setTime(time => time - 1);
@@ -33,6 +35,7 @@ export default function BuyVip() {
   const fetchHisotryPayment = async () => {
     const res = await request("GET", path.billing);
     setHistoryPayment(res)
+    getMe(dispatch)
   }
   useEffect(() => {
     fetchHisotryPayment()
