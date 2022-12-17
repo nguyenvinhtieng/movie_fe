@@ -56,12 +56,11 @@ const Product = () => {
   }, [error, success]);
 
   const handleAutoCompleteChange = (e, value) => {
-    console.log(value)
-    setUpdateMovie({ ...movie, categories: value.map((el) => el.id) });
+    setUpdateMovie({ ...updateMovie, categories: value.map((el) => el.id) });
   };
 
   const handleSelect = (e) => {
-    setUpdateMovie({ ...movie, [e.target.name]: Number(e.target.value) });
+    setUpdateMovie({ ...updateMovie, [e.target.name]: Number(e.target.value) });
   };
 
   const handleChange = (e) => {
@@ -74,9 +73,7 @@ const Product = () => {
       value = Number(value);
     }
 
-    console.log("a");
-
-    setUpdateMovie({ ...movie, [e.target.name]: value });
+    setUpdateMovie({ ...updateMovie, [e.target.name]: value });
   };
 
   const upload = (items) => {
@@ -134,15 +131,12 @@ const Product = () => {
       data.push({ file: video, label: "video" });
     }
 
-    console.log(updateMovie);
-    // upload(data);
+    upload(data);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(movie)
-    updateMovieAPI(movie, dispatch);
-    // navigate("/admin/movies");
+    updateMovieAPI(movie.id, updateMovie, dispatch);
   };
 
   const dispatch = useDispatch();
