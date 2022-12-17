@@ -73,7 +73,11 @@ a {
     padding-bottom: 50px;
     padding-top: 20px;
   }
-  
+  .chatPage {
+    background-color: var(--eerie-black);
+    min-height: 100vh;
+    padding-top: 30px;
+}
   /*-----------------------------------*\
    * #RESET
   \*-----------------------------------*/
@@ -1937,6 +1941,7 @@ a {
     overflow: auto;
     padding: 16px;
     padding-bottom: 20px;
+    margin-top: 20px;
     &::-webkit-scrollbar {
       width: 10px;
     }
@@ -1951,23 +1956,58 @@ a {
     }
 
     &__item {
-      margin-bottom: 6px;
+      margin-bottom: 10px;
       display: flex;
+      align-items: flex-start;
       font-size: 16px;
       &.me {
         justify-content: flex-end;
         // flex-direction: row-reverse;
-        .info .avatar {
+        .info {
           display: none;
+        }
+        .message {
+          color: #fff;
+          background-color: #008dda;
         }
       }
       .info {
         display: flex;
         gap: 6px;
+        align-items: center;
+        .data {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          // align-items: center;
+          min-width: 50px;
+          .name {
+            line-height: 1;
+          }
+          .time {
+            line-height: 1;
+            font-weight: normal;
+            font-size: 11px;
+            color: #333;
+            margin-top: 4px;
+            padding: 3px 6px;
+            border-radius: 2px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            &.ADMIN {
+              background-color: yellow;
+            }
+            &.VIP {
+              background-color: green;
+              color: #fff;
+            }
+          }
+        }
       }
       .avatar {
-        width: 30px;
-        height: 30px;
+        width: 40px;
+        height: 40px;
         border-radius: 50%;
         overflow: hidden;
         img {
@@ -1979,7 +2019,13 @@ a {
         font-weight: bold;
       }
       .message {
-        margin-left: 8px;
+        padding: 10px 20px;
+        width: fit-content;
+        margin-top: 4px;
+        margin-left: 10px;
+        border-radius: 10px;
+        color: #333;
+        background-color: #e4e6eb;
       }
     }
   }

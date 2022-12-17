@@ -54,11 +54,8 @@ export default function Chat() {
     }, 100)
   }
 
-  console.log("chats: ", chats)
-
-
   return (
-    <div className="homeUser">
+    <div className="chatPage">
       <Header></Header>
       <div className="containerUser">
         <div className="chat">
@@ -70,7 +67,10 @@ export default function Chat() {
                     <div className="avatar">
                       <img src={chat.users.avatar} alt="" />
                     </div>
-                    <div className="name">{chat.users.name} : </div>
+                    <div className="data">
+                      <div className="name">{chat.users.name}</div>
+                      <time className={`time ${chat.users.roles.includes("ROLE_ADMIN") ? "ADMIN" : chat.users.vip ? "VIP" : "USER"}`}>{chat.users.roles.includes("ROLE_ADMIN") ? "ADMIN" : chat.users.vip ? "VIP" : "USER"}</time>
+                    </div>
                   </span>
                   <span className="message">{chat.message}</span>
                 </div>
