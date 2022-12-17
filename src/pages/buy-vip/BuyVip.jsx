@@ -39,7 +39,9 @@ export default function BuyVip() {
   // socket
   useEffect(() => {
     if(!socket) return
+    console.log("s: ", socket)
     socket.on('biling', () => {
+      console.log("On event billing")
       fetchHisotryPayment()
     })
   }, [socket])

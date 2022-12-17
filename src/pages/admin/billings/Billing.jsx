@@ -1,7 +1,9 @@
-import "./categories.css";
+// import "./categories.css";
 import { DataGrid } from "@mui/x-data-grid";
 import { DeleteOutline } from "@mui/icons-material";
 // import { categories } from "../../../dummyData";
+// import socketIO from 'socket.io-client';
+
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -10,7 +12,7 @@ import {
 } from "../../../API/billing.api";
 import { toast } from "react-toastify";
 import categorySlice from "../../../store/slice/categorySlice";
-
+// const socket = socketIO.connect('http://localhost:1701');
 
 const Billings = () => {
   const { billings, error, success } = useSelector(
@@ -22,8 +24,15 @@ const Billings = () => {
     { field: "id", headerName: "ID", width: 90 },
     {
       field: "name",
-      headerName: "Tên danh mục",
+      headerName: "Tên gói cước",
       width: 280,
+      renderCell:(params) => {
+        return (
+            <div className="user-list__user">
+                  {params.row.plan.name}
+            </div>
+        )
+    }
     },
     {
       field: "amount",
@@ -112,7 +121,10 @@ const Billings = () => {
   }, [error, success]);
 
   function handleConfirm(id) {
-    updateBillingAPI(id)
+    updateBillingAPI(id, dispatch)
+    // setTimeout(()=> {
+    //   socket.emit("")
+    // }, 1000)
   }
 
   const handleDelete = (id) => {
@@ -124,7 +136,7 @@ const Billings = () => {
     <>
       <div className="categories-list">
         <DataGrid
-          rows={categories}
+          rows={billings}
           columns={columns}
           pageSize={9}
           checkboxSelection

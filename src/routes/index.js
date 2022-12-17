@@ -7,6 +7,7 @@ import User from "../pages/admin/user/User";
 import Movie from "../pages/admin/movie/Movie";
 import MovieList from "../pages/admin/movieList/MovieList";
 import AddMovie from "../pages/admin/addMovie/AddMovie";
+import Billings from "../pages/admin/billings/Billing";
 
 import Series from "../pages/admin/series/Series";
 import ListSeries from "../pages/admin/listSeries/ListSeries";
@@ -81,6 +82,10 @@ const router = createBrowserRouter([
       {
         path: "movies",
         element: <MovieList />
+      },
+      {
+        path: "billings",
+        element: <Billings />
       },
       {
         path: "movies/:id",

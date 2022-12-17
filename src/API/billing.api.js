@@ -13,7 +13,7 @@ export const getBillingsAPI = async (dispatch) => {
   };
 
   //update
-  export const updateBillingAPI = async (id, billing, dispatch) => {
+  export const updateBillingAPI = async (id, dispatch) => {
     dispatch(billingSlice.actions.updateBillingStart());
     try {
       const res = await request("PUT", path.confirmAdminBilling(id));
