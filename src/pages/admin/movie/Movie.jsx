@@ -140,7 +140,7 @@ const Product = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    console.log(movie)
     updateMovieAPI(movie, dispatch);
     // navigate("/admin/movies");
   };

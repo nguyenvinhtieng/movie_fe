@@ -12,13 +12,14 @@ import { getListsAPI } from "./API/lists.api";
 import { getPlansAPI } from "./API/plans.api";
 
 const App = () => {
+  const {auth} = useSelector(state => state)
   const dispatch = useDispatch()
   useEffect(() => {
     getMoviesAPI(dispatch);
     getCategoriesAPI(dispatch)
     getListsAPI(dispatch)
     getPlansAPI(dispatch)
-  }, []);
+  }, [auth]);
   return (
     <>
       <RouterProvider router={router} />

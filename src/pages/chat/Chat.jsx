@@ -54,21 +54,23 @@ export default function Chat() {
     }, 100)
   }
 
-
   return (
-    <div className="homeUser">
+    <div className="chatPage">
       <Header></Header>
       <div className="containerUser">
         <div className="chat">
           <div className="chat__wrapper">
             <div className="chat__content">
               {chats.length > 0 && chats.map((chat, _) => 
-                <div className="chat__content__item" key={chat.id}>
+                <div className={`chat__content__item ${chat.users.id == auth.user.id ? "me" : ""}`} key={chat.id}>
                   <span className="info">
                     <div className="avatar">
                       <img src={chat.users.avatar} alt="" />
                     </div>
-                    <div className="name">{chat.users.name} : </div>
+                    <div className="data">
+                      <div className="name">{chat.users.name}</div>
+                      <time className={`time ${chat.users.roles.includes("ROLE_ADMIN") ? "ADMIN" : chat.users.vip ? "VIP" : "USER"}`}>{chat.users.roles.includes("ROLE_ADMIN") ? "ADMIN" : chat.users.vip ? "VIP" : "USER"}</time>
+                    </div>
                   </span>
                   <span className="message">{chat.message}</span>
                 </div>

@@ -6,12 +6,14 @@ import { Outlet } from 'react-router-dom'
 import { getUsersAPI } from '../../API/users.api'
 import { useDispatch } from 'react-redux'
 import { getBillingsAPI } from '../../API/billing.api'
+import { getReviewsAPI } from '../../API/reviews.api'
 
 const Admin = () => {
   const dispatch = useDispatch()
   useEffect(() => {
     getUsersAPI(dispatch);
     getBillingsAPI(dispatch)
+    getReviewsAPI(dispatch)
   }, []);
   
   return (

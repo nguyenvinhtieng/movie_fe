@@ -13,10 +13,10 @@ export const getUsersAPI = async (dispatch) => {
   };
   
   //create
-  export const createUserAPI = async (movie, dispatch) => {
+  export const createUserAPI = async (user, dispatch) => {
     dispatch(userSlice.actions.createUserStart());
     try {
-      const res = await request("POST", path.createUser, {body: movie});
+      const res = await request("POST", path.createUser, {body: user});
       console.log(res)
       dispatch(userSlice.actions.createUserSuccess(res));
     } catch (err) {
@@ -25,10 +25,10 @@ export const getUsersAPI = async (dispatch) => {
   };
 
   //update
-  export const updateUserAPI = async (id, movie, dispatch) => {
+  export const updateUserAPI = async (id, user, dispatch) => {
     dispatch(userSlice.actions.updateUserStart());
     try {
-      const res = await request("PUT", path.updateUser(id), {body: movie});
+      const res = await request("PUT", path.updateUser(id), {body: user});
       dispatch(userSlice.actions.updateUserSuccess(res));
     } catch (err) {
       dispatch(userSlice.actions.updateUserFailure({error_message: err.message}));

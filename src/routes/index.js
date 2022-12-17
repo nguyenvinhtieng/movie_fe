@@ -32,6 +32,8 @@ import Chat from "../pages/chat/Chat";
 import SeriesUser from "../pages/series/Series";
 import Payment from "../pages/payment/Payment";
 import ResetPass from "../pages/reset-password/ResetPass";
+import ForgotPass from "../pages/forgot-pass/ForgotPass";
+import Reviews from "../pages/admin/reviews/Reviews";
 
 const router = createBrowserRouter([
   {
@@ -47,6 +49,14 @@ const router = createBrowserRouter([
     element: (
       <CheckLogin>
         <Register />
+      </CheckLogin>
+    ),
+  },
+  {
+    path: "forgot-pass",
+    element: (
+      <CheckLogin>
+        <ForgotPass />
       </CheckLogin>
     ),
   },
@@ -106,6 +116,10 @@ const router = createBrowserRouter([
       {
         path: "new-series",
         element: <AddSeries />
+      },
+      {
+        path: "reviews",
+        element: <Reviews />
       },
     ],
   },

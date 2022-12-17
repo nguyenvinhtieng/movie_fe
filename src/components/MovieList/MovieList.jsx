@@ -8,7 +8,7 @@ export default function MovieList({movies}) {
         <ul className="moviesList">
           {movies.length === 0 && <h1 className="empty">Không có phim nào</h1>}
           {movies.length > 0 && movies.map((movie, _) => (
-            <li key={movie.id} className="moviesItem">
+            <li key={movie.id + Math.random()} className="moviesItem">
               {movie.vip && (<div className="moviesItem__vip"><span>VIP</span></div>)}
               <div>
                 <Link to={`/detail/${movie.id}`} className="moviesItem__banner">

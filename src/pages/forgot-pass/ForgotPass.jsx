@@ -1,15 +1,16 @@
-import "./login.scss";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import { loginApi } from "../../API/auth.api";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import request from "../../services/request";
+import { path } from "../../API/apiPath";
 
-export default function Login() {
+export default function ForgotPass() {
   const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
   const dispatch = useDispatch();
-
+  const navigate = useNavigate()
   const error = useSelector((state) => state.auth.error);
 
   useEffect(() => {
@@ -20,7 +21,18 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await loginApi({ username, password }, dispatch);
+    if(!username || !email ) {
+      toast.error("Please fill all field!")
+      return
+    }
+    const res = await request("POST", path.resetPass, {body: {
+      email,
+      username,
+      path: window.location.origin + "/reset-password"
+    }});
+    navigate("/login")
+    toast.success("Please check your email to reset password")
+
   };
   return (
     <div className="loginPage">
@@ -30,29 +42,28 @@ export default function Login() {
         </div>
         <div className="loginPage__container">
           <form onSubmit={handleSubmit}>
-            <h1>Sign In</h1>
+            <h1>Forgot password</h1>
             <input
               type="text"
               placeholder="Username"
+              value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
             <input
-              type="password"
-              placeholder="Password"
-              onChange={(e) => setPassword(e.target.value)}
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <button type="submit" className="loginButton">
-              Sign In
+              Reset password
             </button>
             <span>
-              New to Netflix?{" "}
+              Have an account?
               <b>
                 {" "}
-                <Link to="/register">Sign up now.</Link>{" "}
+                <Link to="/login">Login now.</Link>{" "}
               </b>
-            </span>
-            <span>
-              <Link to="/forgot-pass">Forgot password</Link>{" "}
             </span>
             <small>
               This page is protected by Google reCAPTCHA to ensure you're not a
