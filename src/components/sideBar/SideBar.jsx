@@ -9,18 +9,24 @@ const SideBar = () => {
                 <div className="side-bar__menu">
                     <div className="side-bar--titles">Dashboard</div>
                     <div className="side-bar__list">
-                        <div className="side-bar__list--item active">
-                            <LineStyle className="side-bar__icon"/>
-                            Home
-                        </div>
-                        <div className="side-bar__list--item">
-                            <Timeline className="side-bar__icon"/>
-                            Analytics
-                        </div>
-                        <div className="side-bar__list--item">
-                            <TrendingUp className="side-bar__icon"/>
-                            Sales
-                        </div>
+                        <Link to="/admin/">
+                            <div className="side-bar__list--item active">
+                                <LineStyle className="side-bar__icon"/>
+                                Home
+                            </div>
+                        </Link>
+                        <Link to="/admin/movies">
+                            <div className="side-bar__list--item">
+                                <Storefront className="side-bar__icon"/>
+                                Movies
+                            </div>
+                        </Link>
+                        <Link to="/admin/billings">
+                            <div className="side-bar__list--item">
+                                <PermIdentity className="side-bar__icon"/>
+                                Billings
+                            </div>
+                        </Link>
                     </div>
                 </div>
                 <div className="side-bar__menu">
@@ -32,12 +38,7 @@ const SideBar = () => {
                                 Users
                             </div>
                         </Link>
-                        <Link to="/admin/movies">
-                            <div className="side-bar__list--item">
-                                <Storefront className="side-bar__icon"/>
-                                Movies
-                            </div>
-                        </Link>
+                        
                         <Link to="/admin/categories">
                             <div className="side-bar__list--item">
                                 <PermIdentity className="side-bar__icon"/>
@@ -56,10 +57,7 @@ const SideBar = () => {
                                 Series
                             </div>
                         </Link>
-                        <div className="side-bar__list--item">
-                            <BarChart  className="side-bar__icon"/>
-                            Reports
-                        </div>
+                    
                     </div>
                 </div>
                 <div className="side-bar__menu">

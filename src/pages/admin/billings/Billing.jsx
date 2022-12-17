@@ -1,0 +1,138 @@
+import "./categories.css";
+import { DataGrid } from "@mui/x-data-grid";
+import { DeleteOutline } from "@mui/icons-material";
+// import { categories } from "../../../dummyData";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  updateBillingAPI,
+  deleteBillingAPI,
+} from "../../../API/billing.api";
+import { toast } from "react-toastify";
+import categorySlice from "../../../store/slice/categorySlice";
+
+
+const Billings = () => {
+  const { billings, error, success } = useSelector(
+    (state) => state.billing
+  );
+  const dispatch = useDispatch();
+
+  const columns = [
+    { field: "id", headerName: "ID", width: 90 },
+    {
+      field: "name",
+      headerName: "Tên danh mục",
+      width: 280,
+    },
+    {
+      field: "amount",
+      headerName: "Tổng tiền",
+      width: 300,
+      editable: true,
+    },
+    {
+      field: "payment",
+      headerName: "Phương thức",
+      width: 300,
+      editable: true,
+    },
+    {
+        field: "code",
+        headerName: "CODE",
+        width: 300,
+        editable: true,
+      },
+      {
+        field: "user",
+        headerName: "User",
+        width: 300,
+        renderCell:(params) => {
+            return (
+                <div className="user-list__user">
+                    
+                      {params.row.users.email}
+                </div>
+            )
+        }
+      },
+      {
+        field: "plan",
+        headerName: "Gói đăng kí",
+        width: 300,
+        renderCell:(params) => {
+            return (
+                <div className="user-list__user">
+                    
+                      {params.row.plan.name}
+                </div>
+            )
+        }
+      },
+      {
+        field: "createdAt",
+        headerName: "Ngày khởi tạo",
+        width: 300,
+        editable: true,
+      },
+    {
+      field: "action",
+      headerName: "Action",
+      width: 140,
+      renderCell: (params) => {
+        return (
+          <div className="categories-list__action">
+            <button
+              className="categories-list__button--edit"
+              onClick={() => handleConfirm(params.row.id)}
+            >
+              Confirm
+            </button>
+
+            <DeleteOutline
+              onClick={() => handleDelete(params.row.id)}
+              className="user-list__button--remove"
+            />
+          </div>
+        );
+      },
+    },
+  ];
+
+ 
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+    if (success) {
+      toast.success(success)
+    }
+    dispatch(categorySlice.actions.refreshErrorAndSuccess())
+  }, [error, success]);
+
+  function handleConfirm(id) {
+    updateBillingAPI(id)
+  }
+
+  const handleDelete = (id) => {
+    deleteBillingAPI(id, dispatch)
+  };
+  
+
+  return (
+    <>
+      <div className="categories-list">
+        <DataGrid
+          rows={categories}
+          columns={columns}
+          pageSize={9}
+          checkboxSelection
+          disableSelectionOnClick
+        />
+      </div>
+    </>
+  );
+};
+
+export default Billings;
