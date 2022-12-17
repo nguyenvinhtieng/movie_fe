@@ -85,7 +85,7 @@ export default function BuyVip() {
           <div className="payment__item" key={item.id} onClick={()=>showBuyVipPayment(item.id)}>
             <div className="name">{item.name}</div>
             <div className="description">{item.description}</div>
-            <div className="price">${item.price} <span className='days'>/ {item.days} days</span></div>
+            <div className="price">{item.price} VNĐ <span className='days'>/ {item.days} days</span></div>
           </div>
           )}
         </div>
