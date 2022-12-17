@@ -20,7 +20,6 @@ export default function ResetPass() {
   }
   return (
     <>
-      <Header></Header>
       <div className="homeUser">
         <div className="containerUser">
           <div className="resetPass">

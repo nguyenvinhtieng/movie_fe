@@ -10,6 +10,7 @@ import request from "../../services/request";
 import { path } from "../../API/apiPath";
 import authSlice from "../../store/slice/authSlice";
 import useOnClickOutside from "../../hooks/useOnClickOutside";
+import { getMe } from "../../API/auth.api";
 
 export default function Header() {
   const auth = useSelector(state => state.auth)
@@ -64,6 +65,7 @@ export default function Header() {
     toast.success("Update data successfully")
     setEmail("")
     setName("")
+    getMe(dispatch)
     setAvatar(null)
   }
   const handleUpdateInfo = () => {
@@ -150,11 +152,11 @@ export default function Header() {
             <li><NavLink to="/chat" className={({isActive}) => isActive ? "navbarLink active" : "navbarLink"}>Chat</NavLink></li>
             <li><NavLink to="/buy-vip" className={({isActive}) => isActive ? "navbarLink active" : "navbarLink"}>Buy VIP</NavLink></li>
             {/* {auth.user.} */}
-            {auth.user.roles.includes("ROLE_ADMIN") && <li><NavLink to="/admin" className="navbarLink">Admin Page</NavLink></li>}
+            {auth?.user?.roles?.includes("ROLE_ADMIN") && <li><NavLink to="/admin" className="navbarLink">Admin Page</NavLink></li>}
           </ul>
           <div className="NavBarRight">
             <span className="NavBarName">
-              Hello <b> {auth.user?.name || "Anonymous"} </b> {auth?.user?.vip && <span className="vip">VIP</span>}
+              Hello <b> {auth?.user?.name || "Anonymous"} </b> {auth?.user?.vip && <span className="vip">VIP</span>}
             </span>
             <span className="NavBarMenu" ref={menuRef}>
               <span className="ico" onClick={()=>setShowMenu(prev => !prev)}>

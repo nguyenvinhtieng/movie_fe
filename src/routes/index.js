@@ -13,9 +13,12 @@ import Series from "../pages/admin/series/Series";
 import ListSeries from "../pages/admin/listSeries/ListSeries";
 import AddSeries from "../pages/admin/addSeries/AddSeries";
 
-
 import Login from "../pages/login/Login";
-import {CheckLogin, ProtectedUserRoute, ProtectedAdminRoute} from "./protected"
+import {
+  CheckLogin,
+  ProtectedUserRoute,
+  ProtectedAdminRoute,
+} from "./protected";
 import ErrorPage from "../pages/ErrorPage";
 import Home from "../pages/home/Home";
 import HomeAdmin from "../pages/admin/home/HomeAdmin";
@@ -75,27 +78,27 @@ const router = createBrowserRouter([
       },
       {
         path: "categories",
-        element: <Categories />
+        element: <Categories />,
       },
       {
         path: "plans",
-        element: <Plans />
+        element: <Plans />,
       },
       {
         path: "users",
-        element: <UserList />
+        element: <UserList />,
       },
       {
         path: "users/:userId",
-        element: <User />
+        element: <User />,
       },
       {
         path: "movies",
-        element: <MovieList />
+        element: <MovieList />,
       },
       {
         path: "billings",
-        element: <Billings />
+        element: <Billings />,
       },
       {
         path: "movies/:id",
@@ -103,11 +106,11 @@ const router = createBrowserRouter([
       },
       {
         path: "new-movie",
-        element: <AddMovie />
+        element: <AddMovie />,
       },
       {
         path: "series",
-        element: <ListSeries />
+        element: <ListSeries />,
       },
       {
         path: "series/:id",
@@ -115,11 +118,11 @@ const router = createBrowserRouter([
       },
       {
         path: "new-series",
-        element: <AddSeries />
+        element: <AddSeries />,
       },
       {
         path: "reviews",
-        element: <Reviews />
+        element: <Reviews />,
       },
     ],
   },
@@ -168,48 +171,46 @@ const router = createBrowserRouter([
   {
     path: "/buy-vip",
     element: (
-       <ProtectedUserRoute>
+      <ProtectedUserRoute>
         <BuyVip />
-       </ProtectedUserRoute>
+      </ProtectedUserRoute>
     ),
     errorElement: <ErrorPage />,
   },
   {
     path: "/payment",
     element: (
-       <ProtectedUserRoute>
+      <ProtectedUserRoute>
         <Payment />
-       </ProtectedUserRoute>
+      </ProtectedUserRoute>
     ),
     errorElement: <ErrorPage />,
   },
   {
     path: "/chat",
     element: (
-       <ProtectedUserRoute>
+      <ProtectedUserRoute>
         <Chat />
-       </ProtectedUserRoute>
+      </ProtectedUserRoute>
     ),
     errorElement: <ErrorPage />,
   },
   {
     path: "/series",
     element: (
-       <ProtectedUserRoute>
+      <ProtectedUserRoute>
         <SeriesUser />
-       </ProtectedUserRoute>
+      </ProtectedUserRoute>
     ),
     errorElement: <ErrorPage />,
   },
   {
     path: "/reset-password/*",
     element: (
-       <ProtectedUserRoute>
         <ResetPass />
-       </ProtectedUserRoute>
     ),
     errorElement: <ErrorPage />,
-  }
+  },
 ]);
 
 export default router;
