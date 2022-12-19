@@ -94,7 +94,6 @@ a {
   
   a,
   img,
-  span,
   input,
   button,
   ion-icon { display: block; }
@@ -1696,6 +1695,7 @@ a {
         white-space: nowrap;
         transition: all 0.2s linear;
         font-size: 12px;
+        display: block;
         &:hover {
           background-color: rgb(70, 70, 70);
         }
@@ -1708,6 +1708,7 @@ a {
   margin-right: auto;
   max-width: 1200px;
   // display: flex;
+  padding: 0 16px;
   width: 100%;
   &.detail {
     display: flex;
@@ -2025,6 +2026,7 @@ a {
             display: flex;
             justify-content: center;
             align-items: center;
+            width: fit-content;
             &.ADMIN {
               background-color: yellow;
             }
@@ -2335,6 +2337,7 @@ a {
       display: flex;
       justify-content: center;
       align-items: center;
+      white-space: nowrap;
       &.blue {
         background-color: rgb(51, 102, 255);
       }
@@ -2510,4 +2513,34 @@ a {
   border-radius: 4px;
   background-color: rgb(255, 255, 0);
   display: inline-block;
+}
+
+.movie__search {
+  width: 100%;
+  display: flex;
+  margin-bottom: 25px;
+  font-family: "Poppins", sans-serif;
+  input {
+    width: 100%;
+    padding: 8px 16px;
+    border: 1px solid #999;
+    outline: none;
+    border-radius: 3px 0 0 3px;
+  }
+  button {
+    padding: 8px 16px;
+    color: #fff;
+    background-color: #333;
+    border-radius: 0 3px 3px 0;
+    transition: all 0.2s linear;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+.highlight {
+  font-size: larger;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  box-shadow: #008dda 0px 0px 10px 5px;
 }

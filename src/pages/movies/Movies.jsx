@@ -5,7 +5,8 @@ import MovieList from '../../components/MovieList/MovieList'
 export default function Movies() {
   const [movies, setMovies] = useState([])
   const { category, movie } = useSelector(state => state)
-
+  const [search, setSearch] = useState('')
+  const [hightLightSearch, setHightLightSearch] = useState([])
   useEffect(()=> {
     let movieActive = movie?.movies?.filter(item => item.active)
     setMovies(movieActive)
@@ -24,6 +25,18 @@ export default function Movies() {
     })
     setMovies(newMovies)
   }
+  
+  const searchMovie = () => {
+    let movieActive = movie?.movies?.filter(item => item.active)
+    let newMovies = movieActive.filter(movie => {
+      if(movie.title.toLowerCase().includes(search.toLowerCase()) || movie.description.toLowerCase().includes(search.toLowerCase())) {
+        return true
+      }
+      return false
+    })
+    setMovies(newMovies)
+    setHightLightSearch([search])
+  }
 
   return (
     <div className="homeUser">
@@ -31,7 +44,12 @@ export default function Movies() {
       <div className="containerUser">
         <section className="top-rated">
           <div className="containerMovieList">
+
             <p className="section-subtitle">Movies</p>
+            <div className="movie__search">
+              <input type="text" placeholder='Search your movie...' value={search} onChange={(e)=>setSearch(e.target.value)}/>
+              <button onClick={searchMovie}>Search</button>
+            </div>
             <ul className="filter-list">
               {category?.categories?.length > 0 && category.categories.map((category) => 
                 <li><button className="filter-btn" onClick={()=>chooseCategory(category.id)}>{category.name}</button></li>
@@ -40,7 +58,7 @@ export default function Movies() {
                 <button className="filter-btn" onClick={()=>setMovies(movie?.movies)}>All</button>
               </li>
             </ul>
-            <MovieList movies={movies}></MovieList>
+            <MovieList movies={movies} hightLightSearch={hightLightSearch}></MovieList>
           </div>
         </section>
       </div>
